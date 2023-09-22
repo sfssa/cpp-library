@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+#directory
+/MySTL/.vs
+/MySTL/x64
+/MySTL/MySTL/x64
+
+#file
+*.vcxproj
+*.filters
+*.users
