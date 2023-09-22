@@ -39,4 +39,4 @@
 #file
 *.vcxproj
 *.filters
-*.users
+*.user
