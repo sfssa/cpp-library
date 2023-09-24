@@ -6,7 +6,7 @@ namespace mystl
 {
 
 /*
-* 两个参数，T代表常量的类型；v代表常量的值
+* 两个参数，T代表常量的类型；value代表常量的值
 * 定义一个静态常量成员，这个成员可以在编译期使用(constexpr)
 */
 template<class T,T value>
