@@ -411,5 +411,5 @@ public:
 	{
 		return !(lhs < rhs);
 	}
-};
+}
 }
