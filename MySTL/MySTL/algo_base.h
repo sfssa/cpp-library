@@ -329,7 +329,12 @@ OutputIter unchecked_fill_n(OutputIter first, Size n, const T& value)
 	return first;
 }
 
-//为一字节类型提供特化版本
+/*
+ * 为一字节类型提供特化版本
+ * 这是由于memset函数是按照字节来填充的，当数据类型是1字节大小时，用memset效率更高
+ * 而其他非1字节的类型不能用memset，比如int是4字节，memset(起始地址,值,字节数)，他会把每个字节的数值换为参数中的值
+ * 比如类型是int,一个int有四个字节，参数中的值为1，那么调用函数后的每个int数据是这样:00000001 00000001 00000001 00000001
+*/
 template<class Tp,class Size,class Up>
 typename std::enable_if<
 	std::is_integral<Tp>::value && sizeof(Tp)==1 &&
