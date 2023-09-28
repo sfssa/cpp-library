@@ -157,7 +157,7 @@ struct is_random_iterator:public has_iterator_category_of<Iter,random_access_ite
 //检查迭代器是否为任何一种特定类别的迭代器
 template <class Iterator>
 struct is_iterator :
-	public m_bool_constanc<is_input_iterator<Iterator>>::value ||
+	public m_bool_constant<is_input_iterator<Iterator>::value ||
 	is_output_iterator<Iterator>::value >
 {};
 
@@ -229,7 +229,7 @@ void advance_dispatch(InputIterator& i, Distance n, input_iterator_tag)
 }
 
 //双向迭代器实现向前移动操作
-template<class InputIterator,class Distance>
+template<class BidirectionalIterator,class Distance>
 void advance_dispatch(BidirectionalIterator& i, Distance n, bidirectional_iterator_tag)
 {
 	if (n >= 0)
@@ -239,8 +239,8 @@ void advance_dispatch(BidirectionalIterator& i, Distance n, bidirectional_iterat
 }
 
 //random迭代器版本	
-template<class RandomIterator,class Distance>
-void advance_dispatch(Random& i, Distance n, random_access_iterator_tag)
+template <class RandomIter,class Distance>
+void advance_dispatch(RandomIter& i, Distance n, random_access_iterator_tag)
 {
 	i += n;
 }
@@ -248,9 +248,8 @@ void advance_dispatch(Random& i, Distance n, random_access_iterator_tag)
 template<class InputIterator,class Distance>
 void advance(InputIterator& i, Distance n)
 {
-	advance_dispatch(i, n, iterator_category());
+	advance_dispatch(i, n, iterator_category(i));
 }
-
 //反向迭代器
 template<class Iterator>
 class reverse_iterator
@@ -309,7 +308,7 @@ public:
 	}
 
 	//后置++
-	self operator(int)
+	self operator++(int)
 	{
 		self tmp = *this;
 		--current;
@@ -360,56 +359,55 @@ public:
 	{
 		return *(*this + n);
 	}
-
-	/*
+};
+/*
 	* reverse_iterator是一个模板类，可以用于不同类型的迭代器，每个不同的类型对应不同的迭代器，因此
 	* 使用模板来适应不同的迭代器类型
-	* 
+	*
 	* 上面的函数中没有使用模板是由于类中已经定义了迭代器的类型信息，不需要使用额外的模板参数
 	*/
 	//重载operator-
-	template<class Iterator>
-	typename reverse_iterator<Iterator>::difference_type
-	operator-(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
-	{
-		return rhs.base() - lhs.base();
-	}
+template <class Iterator>
+typename reverse_iterator<Iterator>::difference_type
+operator-(const reverse_iterator<Iterator>& lhs,
+	const reverse_iterator<Iterator>& rhs)
+{
+	return rhs.base() - lhs.base();
+}
+//重载比较操作符
+template <class Iterator>
+bool operator==(const reverse_iterator<Iterator>& lhs,
+	const reverse_iterator<Iterator>& rhs)
+{
+	return lhs.base() == rhs.base();
+}
+template<class Iterator>
+bool operator<(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+{
+	return rhs.base() < lhs.base();
+}
 
-	//重载比较操作符
-	template<class Iterator>
-	bool operator==(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
-	{
-		return lhs.base() == rhs.base();
-	}
+template<class Iterator>
+bool operator!=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+{
+	return !(lhs == rhs);
+}
 
-	template<class Iterator>
-	bool operator<(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
-	{
-		return rhs.base() < lhs.base();
-	}
+template<class Iterator>
+bool operator>(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+{
+	return rhs < lhs;
+}
 
-	template<class Iterator>
-	bool operator!=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
-	{
-		return !(lhs == rhs);
-	}
+template<class Iterator>
+bool operator<=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+{
+	return !(rhs < lhs);
+}
 
-	template<class Iterator>
-	bool operator>(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
-	{
-		return rhs < lhs;
-	}
-
-	template<class Iterator>
-	bool operator<=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
-	{
-		return !(rhs < lhs);
-	}
-
-	template<class Iterator>
-	bool operator>=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
-	{
-		return !(lhs < rhs);
-	}
+template<class Iterator>
+bool operator>=(const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
+{
+	return !(lhs < rhs);
 }
 }

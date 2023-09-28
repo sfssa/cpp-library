@@ -109,99 +109,112 @@ struct pair
 	* constexpr指示编译器在编译时计算表达式的值或执行函数，以便在运行时之前确定其结果，
 	* 修饰类构造函数时可以保证在编译时调用构造函数，可以提高性能
 	*/
-	template<class Other1=Ty1,class Other2=Ty2,
+	//都有默认构造函数
+	template <class Other1 = Ty1, class Other2 = Ty2,
 		typename = typename std::enable_if<
-		std::is_default_constructible<Other1>::value &&
-		std::is_default_constructible<Other2>::value,void>::type_info>
+		std::is_default_constructible<Other1>::value&&
+		std::is_default_constructible<Other2>::value, void>::type>
 	constexpr pair()
-		:first(), second()//都有默认构造函数
-	{}
+		: first(), second()
+	{
+	}
 
-	template<class U1=Ty1,class U2=Ty2,
+	template <class U1 = Ty1, class U2 = Ty2,
 		typename std::enable_if<
-		std::is_copy_constructible<U1>::value&&		//是否有拷贝构造
+		std::is_copy_constructible<U1>::value&&
 		std::is_copy_constructible<U2>::value&&
-		std::is_convertible<const U1&,Ty1>::value&&	//是否可以隐式转换
-		std::is_convertible<const U2&,Ty2>::value,int>::type=0>
+		std::is_convertible<const U1&, Ty1>::value&&
+		std::is_convertible<const U2&, Ty2>::value, int>::type = 0>
 	constexpr pair(const Ty1& a, const Ty2& b)
-		:first(a), second(b)
-	{}
+		: first(a), second(b)
+	{
+	}
 	
-	template<class U1 = Ty1, class U2 = Ty2,
-		typename std::enable_if <
+	template <class U1 = Ty1, class U2 = Ty2,
+		typename std::enable_if<
 		std::is_copy_constructible<U1>::value&&
 		std::is_copy_constructible<U2>::value &&
 		(!std::is_convertible<const U1&, Ty1>::value ||
-		 !std::is_convertible<const U2&, Ty2>::value), int>::type = 0>
+			!std::is_convertible<const U2&, Ty2>::value), int>::type = 0>
 	explicit constexpr pair(const Ty1& a, const Ty2& b)
-		:first(a), second(b)
-	{}
+		: first(a), second(b)
+	{
+	}
 
 	pair(const pair& lhs) = default;
 	pair(pair&& rhs) = default;
 
-	template<class Other1, class Other2,
+	template <class Other1, class Other2,
 		typename std::enable_if<
 		std::is_constructible<Ty1, Other1>::value&&
 		std::is_constructible<Ty2, Other2>::value&&
 		std::is_convertible<Other1&&, Ty1>::value&&
 		std::is_convertible<Other2&&, Ty2>::value, int>::type = 0>
-	constexpr pair(Other1&& a,Other2&& b)
-		:first(mystl::forward<Other1>(a)),
+	constexpr pair(Other1&& a, Other2&& b)
+		: first(mystl::forward<Other1>(a)),
 		second(mystl::forward<Other2>(b))
-	{}
+	{
+	}
 
-	template<class Other,class Other2>
-	typename std::enable_if<
+	template <class Other1, class Other2,
+		typename std::enable_if<
 		std::is_constructible<Ty1, Other1>::value&&
 		std::is_constructible<Ty2, Other2>::value &&
-		(!std::is_convertible<Other, Ty1>::value ||
-		 !std::is_convertible<Other2, Ty2>::value), int>::type = 0 >
-		explicit constexpr pair(Other1 && a, Other2 && b)
-		:first(mystl::forward<Other1>(a)),second(mystl::forward<Other2>(b))
-	{}
+		(!std::is_convertible<Other1, Ty1>::value ||
+			!std::is_convertible<Other2, Ty2>::value), int>::type = 0>
+	explicit constexpr pair(Other1&& a, Other2&& b)
+		: first(mystl::forward<Other1>(a)),
+		second(mystl::forward<Other2>(b))
+	{
+	}
 
-	template<class Other1,class Other2>
-	typename std::enable_if<
+	template <class Other1, class Other2,
+		typename std::enable_if<
 		std::is_constructible<Ty1, const Other1&>::value&&
 		std::is_constructible<Ty2, const Other2&>::value&&
 		std::is_convertible<const Other1&, Ty1>::value&&
 		std::is_convertible<const Other2&, Ty2>::value, int>::type = 0>
-		constexpr pair(const pair<Other1,Other2>& other)
-		:first(other.first),second(other.second)
-	{}
+	constexpr pair(const pair<Other1, Other2>& other)
+		: first(other.first),
+		second(other.second)
+	{
+	}
 
-	template<class Other1,class Other2>
-	typename std::enable_if<
-		std::is_constructible<Ty1,const Other1&>::value &&
-		std::is_constructible<Ty2,const Other2&>::value &&
-		(!std::is_convertible<const Other1&,Ty1>::value||
-		 !std::is_convertible<const Other2&,Ty2>::value),int>::type=0>
-		explicit constexpr pair(const pair<Other1,Other2>& other)
-		:first(other.first),second(other.second)
-	{}
-
-	template<class Other1,class Other2,
+	template <class Other1, class Other2,
 		typename std::enable_if<
-		std::is_constructible<Ty1,Other1>::value &&
-		std::is_constructible<Ty2,Other2>::value &&
-		std::is_convertible<Other1,Ty1>::value &&
-		std::is_convertible<Other2,Ty2>::value,int>::type=0>
+		std::is_constructible<Ty1, const Other1&>::value&&
+		std::is_constructible<Ty2, const Other2&>::value &&
+		(!std::is_convertible<const Other1&, Ty1>::value ||
+			!std::is_convertible<const Other2&, Ty2>::value), int>::type = 0>
+	explicit constexpr pair(const pair<Other1, Other2>& other)
+		: first(other.first),
+		second(other.second)
+	{
+	}
+
+	template <class Other1, class Other2,
+		typename std::enable_if<
+		std::is_constructible<Ty1, Other1>::value&&
+		std::is_constructible<Ty2, Other2>::value&&
+		std::is_convertible<Other1, Ty1>::value&&
+		std::is_convertible<Other2, Ty2>::value, int>::type = 0>
 	constexpr pair(pair<Other1, Other2>&& other)
-		:first(mystl::forward<Other1>(other.first)),
+		: first(mystl::forward<Other1>(other.first)),
 		second(mystl::forward<Other2>(other.second))
-	{}
+	{
+	}
 
-	template<class Other1, class Other2,
+	template <class Other1, class Other2,
 		typename std::enable_if<
-		std::is_constructible<Ty1,Other1>::value &&
-		std::is_constructible<Ty2,Other2>::value &&
-		(!std::is_convertible<Other1,Ty1>::value ||
-		 !std::is_convertible<Other2,Ty2>::value),int>::type=0>
-	explicit constexpr pair(pair<Other1,Other2>&& other)
-		:first(mystl::forward<Other1>(other.first)),
+		std::is_constructible<Ty1, Other1>::value&&
+		std::is_constructible<Ty2, Other2>::value &&
+		(!std::is_convertible<Other1, Ty1>::value ||
+			!std::is_convertible<Other2, Ty2>::value), int>::type = 0>
+	explicit constexpr pair(pair<Other1, Other2>&& other)
+		: first(mystl::forward<Other1>(other.first)),
 		second(mystl::forward<Other2>(other.second))
-	{}
+	{
+	}
 
 	//重载操作符
 	pair& operator=(const pair& lhs)
@@ -276,16 +289,16 @@ bool operator>(const pair<Ty1, Ty2>& lhs, const pair<Ty1, Ty2>& rhs)
 	return rhs < lhs;	//用已有的函数
 }
 
-template<class Ty1, class Ty2>
+template <class Ty1, class Ty2>
 bool operator<=(const pair<Ty1, Ty2>& lhs, const pair<Ty1, Ty2>& rhs)
 {
-	return !(rhs<lhs)
+	return !(rhs < lhs);
 }
 
-template<class Ty1, class Ty2>
+template <class Ty1, class Ty2>
 bool operator>=(const pair<Ty1, Ty2>& lhs, const pair<Ty1, Ty2>& rhs)
 {
-	return !(lhs < rhs)
+	return !(lhs < rhs);
 }
 
 template<class Ty1,class Ty2>
