@@ -1,17 +1,17 @@
 # 复杂度
 
-| 算法     | 平均时间复杂度 | 最差时间复杂度 | 空间复杂度 | 数据对象稳定性     |
-| -------- | -------------- | -------------- | ---------- | ------------------ |
-| 冒泡排序 | O(n2)          | O(n2)          | O(1)       | 稳定               |
-| 选择排序 | O(n2)          | O(n2)          | O(1)       | 数组稳定，链表稳定 |
-| 插入排序 | O(n2)          | O(n2)          | O(1)       | 稳定               |
-| 快速排序 | O(n*lon2n)     | O(n2)          | O(1)       | 不稳定             |
-| 堆排序   |                |                |            |                    |
-| 归并排序 |                |                |            |                    |
-| 希尔排序 |                |                |            |                    |
-| 计数排序 |                |                |            |                    |
-| 桶排序   |                |                |            |                    |
-|          |                |                |            |                    |
+| 算法     | 平均时间复杂度 | 最差时间复杂度 | 空间复杂度 | 数据对象稳定性       |
+| -------- | -------------- | -------------- | ---------- | -------------------- |
+| 冒泡排序 | O(n2)          | O(n2)          | O(1)       | 稳定                 |
+| 选择排序 | O(n2)          | O(n2)          | O(1)       | 数组不稳定、链表稳定 |
+| 插入排序 | O(n2)          | O(n2)          | O(1)       | 稳定                 |
+| 快速排序 | O(n*log2n)     | O(n2)          | O(log2n)   | 不稳定               |
+| 堆排序   | O(n*log2n)     | O(n*log2n)     | O(1)       | 不稳定               |
+| 归并排序 | O(n*log2n)     | O(n*log2n)     | O(n)       | 稳定                 |
+| 希尔排序 | O(n*log2n)     | O(n2)          | O(1)       | 不稳定               |
+| 计数排序 | O(n+m)         | O(n+m)         | O(n+m)     | 稳定                 |
+| 桶排序   | O(n)           | O(n)           | O(m)       | 稳定                 |
+| 基数排序 | O(k*n)         | O(n2)          |            | 稳定                 |
 
 在排序算法中，"稳定"是指当存在两个相等的元素A和B，它们在排序前的相对顺序和排序后的相对顺序仍然保持不变。换句话说，如果在排序前A在B之前，那么在排序后A仍然会在B之前
 
@@ -292,6 +292,198 @@ void merge_sort(int arr[],int auxiliary_arr[],int left,int right)
         merge_sort(arr, auxiliary_arr, mid + 1, right);
         merge(arr, auxiliary_arr, left, mid, right);
     }
+}
+````
+
+# 七、希尔排序
+
+## 1、算法步骤
+
+- 选择一个增量序列，t1,t2,ti,...,tj,tk，tk=1,ti>tj；
+- 按增量序列个数，对数列进行K趟排序；
+- 每趟排序，根据对应的增量ti，将待排序列分割成若干长度为m的子序列，对各子表进行直接插入排序。当增量为1时，整个序列作为一个表来处理，长度为整个序列的长度；
+
+## 2、代码
+
+```c++
+//将一个10个元素的数组分成两个5元素的数组，数组一从第1个元素为起始，数组二从第6个元素为起始，比较大小
+//如果数组一的元素大于数组二的元素就进行交换；然后将5元素的数组分成两个2元素的数组，不断重复
+void shell_sort(int arr[],int size)
+{
+    int h=1;
+    while(h<size/3)
+        h=h*3+1;
+
+    while(h>=1)
+    {
+        for(int i=h;i<size;++i)
+        {
+            for(int j=i;j>=h&&arr[j]<arr[j-h];j-=h)
+                std::swap(arr[j],arr[j-h]);
+        }
+        h=h/3;
+    }
+}
+```
+
+# 八、计数排序
+
+## 1、算法步骤
+
+- 找到待排序数组中最大和最小的元素；
+- 统计数组中国每个值为i的元素值出现的次数，存入数组C的第i项；
+- 对所有的计数累加；
+- 向填充目标数组，将每个元素i放在新数组的第C[i]项，没放一个元素就将C[i]-1。
+
+## 2、代码
+
+```c++
+void count_sort(int arr[],int size)
+{
+    //找到最大和最小值
+    int max=arr[0],min=arr[0];
+    for(int i=1;i<size;++i)
+    {
+        if(arr[i]>max)
+            max=arr[i];
+        if(arr[i]<min)
+            min=arr[i];
+    }
+    
+    //开辟辅助数组存放出现的次数
+    int* tmp=new int[max-min+1];
+    memset(tmp,0,(max-min+1)*sizeof(int));
+    for(int i=0;i<size;++i)
+        tmp[arr[i]-min]++;
+
+    //获得每个元素的位置
+    for(int i=1;i<max-min+1;++i)
+        tmp[i]+=tmp[i-1];
+
+    //将序列输出到新开辟的空间内
+    int* obj_arr=new int[size];
+    for(int i=size-1;i>=0;--i)
+        obj_arr[--tmp[arr[i]-min]]=arr[i];
+	//在这里可以执行打印
+    delete[] obj_arr;
+    delete[] tmp;
+}
+```
+
+# 九、基数排序
+
+## 1、算法步骤
+
+- 从最低位开始，按照每一位的数值将元素分配到相应的桶中，桶是一个数组或链表结构，存储相同位上有相同数值的元素；
+- 按照分配的原则，收集所有桶中的元素，这回形成新的顺序；
+- 重复前两部，直到所有位都处理完成；
+- 最后按照各位的数值从低到高排列。
+
+## 2、代码
+
+````c++
+void radix_sort(std::vector<int>& arr)
+{
+    int max=arr[0];
+    for(const int t:arr)
+    {
+        if(t>max)
+            max=t;
+    }
+
+    //最多有多少位
+    int num_digits=0;
+    while(max>0)
+    {
+        max/=10;
+        num_digits++;
+    }
+
+    std::vector<std::vector<int>> buckets(10);
+
+    for(int digit=0;digit<num_digits;++digit)
+    {
+        //将元素分配到桶中
+        for(int num:arr)
+        {
+            int index=get_digit(num,digit);
+            buckets[index].emplace_back(num);
+        }
+
+        int pos=0;
+        for(auto& bucket:buckets)
+        {
+            for(int num:bucket)
+                arr[pos++]=num;
+            bucket.clear();
+        }
+    }
+}
+````
+
+# 十、桶排序
+
+## 1、算法步骤
+
+- 设置一个定量的数组当作空桶；
+- 寻访序列，将元素一个一个放到桶中；
+- 对每个不是空的桶进行排序；
+- 从不是空的桶把元素放回原来的序列。
+
+## 2、代码
+
+````c++
+void insertion_sort(std::vector<int>& arr) {
+    for (int i = 1; i < arr.size(); i++) {
+        int key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+std::vector<int> bucket_sort(std::vector<int>& arr,int bucket_size)
+{   
+    if (arr.size() == 0) {
+        return arr;
+    }
+
+    int min = arr[0];
+    int max = arr[0];
+    for (int i = 1; i < arr.size(); i++) {
+        if (arr[i] < min) {
+            min = arr[i];
+        } else if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+
+    int DEFAULT_BUCKET_SIZE = 5;
+    bucket_size = (bucket_size == 0) ? DEFAULT_BUCKET_SIZE : bucket_size;
+
+    int bucket_count = std::floor((max - min) / bucket_size) + 1;
+    std::vector<std::vector<int>> buckets(bucket_count);
+
+    for(int i=0;i<arr.size();++i)
+    {
+        //映射到不同的桶里
+        int bucket_index=std::floor((arr[i]-min)/bucket_size);
+        buckets[bucket_index].emplace_back(arr[i]);
+    }
+
+    arr.clear();
+
+    for(int i=0;i<buckets.size();++i)
+    {
+        insertion_sort(buckets[i]);
+        for(int j=0;j<buckets[i].size();j++)
+            arr.emplace_back(buckets[i][j]);
+    }
+
+    return arr;
 }
 ````
 

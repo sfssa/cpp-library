@@ -2,7 +2,9 @@
 #include<random>
 #include<functional>
 #include<chrono>
+#include<vector>
 #include<algorithm>
+#include<string.h>
 
 void bubble_sort(int arr[],int size)
 {
@@ -240,6 +242,168 @@ void test_time()
     delete arr;
 }
 
+void insertion_sort(std::vector<int>& arr) {
+    for (int i = 1; i < arr.size(); i++) {
+        int key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+std::vector<int> bucket_sort(std::vector<int>& arr,int bucket_size)
+{   
+    if (arr.size() == 0) {
+        return arr;
+    }
+
+    int min = arr[0];
+    int max = arr[0];
+    for (int i = 1; i < arr.size(); i++) {
+        if (arr[i] < min) {
+            min = arr[i];
+        } else if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+
+    int DEFAULT_BUCKET_SIZE = 5;
+    bucket_size = (bucket_size == 0) ? DEFAULT_BUCKET_SIZE : bucket_size;
+
+    int bucket_count = std::floor((max - min) / bucket_size) + 1;
+    std::vector<std::vector<int>> buckets(bucket_count);
+
+    for(int i=0;i<arr.size();++i)
+    {
+        //映射到不同的桶里
+        int bucket_index=std::floor((arr[i]-min)/bucket_size);
+        buckets[bucket_index].emplace_back(arr[i]);
+    }
+
+    arr.clear();
+
+    for(int i=0;i<buckets.size();++i)
+    {
+        insertion_sort(buckets[i]);
+        for(int j=0;j<buckets[i].size();j++)
+            arr.emplace_back(buckets[i][j]);
+    }
+
+    return arr;
+}
+
+//获取数字指定位数的数值
+int get_digit(int num,int digit)
+{
+    int divisor=1;
+    for(int i=0;i<digit;++i)
+    {
+        divisor*=10;
+    }
+    return num/divisor%10;
+}
+
+void radix_sort(std::vector<int>& arr)
+{
+    int max=arr[0];
+    for(const int t:arr)
+    {
+        if(t>max)
+            max=t;
+    }
+
+    //最多有多少位
+    int num_digits=0;
+    while(max>0)
+    {
+        max/=10;
+        num_digits++;
+    }
+
+    std::vector<std::vector<int>> buckets(10);
+
+    for(int digit=0;digit<num_digits;++digit)
+    {
+        //将元素分配到桶中
+        for(int num:arr)
+        {
+            int index=get_digit(num,digit);
+            buckets[index].emplace_back(num);
+        }
+
+        int pos=0;
+        for(auto& bucket:buckets)
+        {
+            for(int num:bucket)
+                arr[pos++]=num;
+            bucket.clear();
+        }
+    }
+}
+
+void test_radix_sort()
+{
+    std::vector<int> arr = {170, 45, 75, 90, 802, 24, 2, 66};
+    radix_sort(arr);
+
+    std::cout << "Sorted array: ";
+    for (int num : arr) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+}
+
+void count_sort(int arr[],int size)
+{
+    for(int i=0;i<size;++i)
+        std::cout<<arr[i]<<" ";
+    std::cout<<std::endl;
+
+    int max=arr[0],min=arr[0];
+    for(int i=1;i<size;++i)
+    {
+        if(arr[i]>max)
+            max=arr[i];
+        if(arr[i]<min)
+            min=arr[i];
+    }
+    
+    int* tmp=new int[max-min+1];
+    memset(tmp,0,(max-min+1)*sizeof(int));
+    for(int i=0;i<size;++i)
+        tmp[arr[i]-min]++;
+
+    for(int i=1;i<max-min+1;++i)
+        tmp[i]+=tmp[i-1];
+
+    int* obj_arr=new int[size];
+    for(int i=size-1;i>=0;--i)
+        obj_arr[--tmp[arr[i]-min]]=arr[i];
+    
+    for(int i=0;i<size;++i)
+        std::cout<<obj_arr[i]<<" ";
+
+    delete[] obj_arr;
+    delete[] tmp;
+}
+
+void test_count_sort()
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dis(1, 1000);
+    int arr[1000];
+    int i = 0;
+    int size=1000;
+    for (; i < size; ++i)
+        arr[i] = dis(gen);
+
+    count_sort(arr,size);
+}
+
 void test_merge_sort()
 {
     std::random_device rd;
@@ -266,8 +430,46 @@ void test_merge_sort()
     delete[] aux_arr; // 释放辅助数组的内存
 }
 
+void shell_sort(int arr[],int size)
+{
+    int h=1;
+    while(h<size/3)
+        h=h*3+1;
+
+    while(h>=1)
+    {
+        for(int i=h;i<size;++i)
+        {
+            for(int j=i;j>=h&&arr[j]<arr[j-h];j-=h)
+                std::swap(arr[j],arr[j-h]);
+        }
+        h=h/3;
+    }
+}
+
+void test_bucket_sort()
+{
+    std::vector<int> arr = {3, 6, 8, 10, 1, 2, 1};
+    std::vector<int> sortedArr = bucket_sort(arr, 3);
+
+    for (int num : sortedArr) {
+        std::cout << num << " ";
+    }
+}
+
+void test_get_digit()
+{
+    int x=1234;
+    int digit=5;
+    int ret=get_digit(x,digit);
+}
+
 int main() {
-    test_accuracy();
-    test_time();
+    test_radix_sort();
+    //test_get_digit();
+    //test_bucket_sort();
+    //test_count_sort();
+    // test_accuracy(shell_sort);
+    // test_time(shell_sort);
     return 0;
 }
