@@ -69,6 +69,8 @@ void test_time(std::function<void(int[],int)>sort_function)
 
 # 一、冒泡排序
 
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/bubble.gif)
+
 ## 1、算法步骤
 
 - 从第一个元素开始遍历数组元素，如果第一个元素大于第二个元素就交换两个元素，从第一对到最后一对，这一步最后可以得到元素的最大值、次大值...；
@@ -97,6 +99,8 @@ void bubble_sort(int arr[],int size)
 ```
 
 # 二、选择排序
+
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/select.gif)
 
 ## 1、算法步骤
 
@@ -131,6 +135,8 @@ void select_sort(int arr[],int size)
 
 # 三、插入排序
 
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/insert.gif)
+
 ##  1、算法步骤
 
 - 将整个序列分为已排序和未排序，第一个元素默认是已排序的第一个元素；
@@ -158,6 +164,8 @@ void insert_sort(int arr[],int size)
 ````
 
 # 四、快速排序
+
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/quick.gif)
 
 ## 1、算法步骤
 
@@ -198,6 +206,8 @@ void quick_sort(int arr[],int left,int right)
 ```
 
 # 五、堆排序
+
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/heap.gif)
 
 ## 1、算法步骤
 
@@ -245,6 +255,8 @@ void heap_sort(int arr[],int size)
 ````
 
 # 六、归并排序
+
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/merge.gif)
 
 ## 1、算法步骤
 
@@ -297,6 +309,8 @@ void merge_sort(int arr[],int auxiliary_arr[],int left,int right)
 
 # 七、希尔排序
 
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/shell.gif)
+
 ## 1、算法步骤
 
 - 选择一个增量序列，t1,t2,ti,...,tj,tk，tk=1,ti>tj；
@@ -327,6 +341,8 @@ void shell_sort(int arr[],int size)
 ```
 
 # 八、计数排序
+
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/count.gif)
 
 ## 1、算法步骤
 
@@ -371,6 +387,8 @@ void count_sort(int arr[],int size)
 ```
 
 # 九、基数排序
+
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/radix.gif)
 
 ## 1、算法步骤
 
@@ -422,6 +440,8 @@ void radix_sort(std::vector<int>& arr)
 ````
 
 # 十、桶排序
+
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/bucket.gif)
 
 ## 1、算法步骤
 
