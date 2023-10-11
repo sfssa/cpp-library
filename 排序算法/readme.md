@@ -65,11 +65,9 @@ void test_time(std::function<void(int[],int)>sort_function)
 }
 ````
 
-
-
 # 一、冒泡排序
 
-<div align=center>![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/bubble.gif)
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/bubble.gif)
 
 ## 1、算法步骤
 
@@ -100,7 +98,7 @@ void bubble_sort(int arr[],int size)
 
 # 二、选择排序
 
-<div align=center>![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/select.gif)
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/select.gif)
 
 ## 1、算法步骤
 
@@ -135,7 +133,7 @@ void select_sort(int arr[],int size)
 
 # 三、插入排序
 
-<div align=center>![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/insert.gif)
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/insert.gif)
 
 ##  1、算法步骤
 
@@ -165,7 +163,7 @@ void insert_sort(int arr[],int size)
 
 # 四、快速排序
 
-<div align=center>![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/quick.gif)
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/quick.gif)
 
 ## 1、算法步骤
 
@@ -207,7 +205,7 @@ void quick_sort(int arr[],int left,int right)
 
 # 五、堆排序
 
-<div align=center>![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/heap.gif)
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/heap.gif)
 
 ## 1、算法步骤
 
@@ -256,7 +254,7 @@ void heap_sort(int arr[],int size)
 
 # 六、归并排序
 
-<div align=center>![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/merge.gif)
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/merge.gif)
 
 ## 1、算法步骤
 
@@ -309,7 +307,7 @@ void merge_sort(int arr[],int auxiliary_arr[],int left,int right)
 
 # 七、希尔排序
 
-<div align=center>![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/shell.gif)
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/shell.gif)
 
 ## 1、算法步骤
 
@@ -342,7 +340,7 @@ void shell_sort(int arr[],int size)
 
 # 八、计数排序
 
-<div align=center>![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/count.gif)
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/count.gif)
 
 ## 1、算法步骤
 
@@ -388,18 +386,28 @@ void count_sort(int arr[],int size)
 
 # 九、基数排序
 
-<div align=center>![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/radix.gif)
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/radix.gif)
 
 ## 1、算法步骤
 
 - 从最低位开始，按照每一位的数值将元素分配到相应的桶中，桶是一个数组或链表结构，存储相同位上有相同数值的元素；
 - 按照分配的原则，收集所有桶中的元素，这回形成新的顺序；
-- 重复前两部，直到所有位都处理完成；
-- 最后按照各位的数值从低到高排列。
+- 重复前两部，直到所有位
 
 ## 2、代码
 
 ````c++
+//获取数字指定位数的数值
+int get_digit(int num,int digit)
+{
+    int divisor=1;
+    for(int i=0;i<digit;++i)
+    {
+        divisor*=10;
+    }
+    return num/divisor%10;
+}
+
 void radix_sort(std::vector<int>& arr)
 {
     int max=arr[0];
@@ -441,7 +449,7 @@ void radix_sort(std::vector<int>& arr)
 
 # 十、桶排序
 
-<div align=center>![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/bucket.gif)
+![](https://github.com/sfssa/cpp-library/blob/master/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/static/bucket.gif)
 
 ## 1、算法步骤
 
