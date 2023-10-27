@@ -229,3 +229,4 @@ static int lept_parse_null(lept_context* c,lept_value* v)
 
 ## 流程图
 
+![](https://github.com/sfssa/cpp-library/blob/master/MyJson/static/01.jpg)
