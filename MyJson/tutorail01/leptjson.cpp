@@ -1,6 +1,5 @@
 #include <assert.h>
 #include <stdlib.h>
-
 #include "leptjson.h"
 
 #define EXPECT(c, ch) \
@@ -8,7 +7,6 @@
         assert(*c->json==(ch)); \
         c->json++; \
     } while (0)
-
 
 struct lept_context
 {
@@ -35,11 +33,35 @@ static int lept_parse_null(lept_context* c,lept_value* v)
     return LEPT_PARSE_OK;
 }
 
+static int lept_parse_true(lept_context* c,lept_value* v)
+{
+    EXPECT(c,'t');
+    if(c->json[0]!='r'||c->json[1]!='u'||c->json[2]!='e')
+        return LEPT_PARSE_INVALID_VALUE;
+
+    c->json+=3;
+    v->type=LEPT_TRUE;
+    return LEPT_PARSE_OK;
+}
+
+static int lept_parse_false(lept_context* c,lept_value* v)
+{
+    EXPECT(c,'f');
+    if(c->json[0]!='a'||c->json[1]!='l'||c->json[2]!='s'||c->json[3]!='e')
+        return LEPT_PARSE_INVALID_VALUE;
+    
+    c->json+=4;
+    v->type=LEPT_FALSE;
+    return LEPT_PARSE_OK;
+}
+
 static int lept_parse_value(lept_context*c,lept_value* v)
 {
     switch(*c->json)
     {
         case 'n':return lept_parse_null(c,v);
+        case 't':return lept_parse_true(c,v);
+        case 'f':return lept_parse_false(c,v);
         case '\0':return LEPT_PARSE_EXPECT_VALUE;
         default:return LEPT_PARSE_INVALID_VALUE;
     }
@@ -52,7 +74,16 @@ int lept_parse(lept_value* v,const char* json)
     c.json=json;
     v->type=LEPT_NULL;
     lept_parse_whilespace(&c);
-    return lept_parse_value(&c,v);
+
+    int ret=-1;
+    if((ret=lept_parse_value(&c,v))==LEPT_PARSE_OK)
+    {
+        // 解析完一个值之后还有其他的值
+        lept_parse_whilespace(&c);
+        if(*c.json!='\0')
+            ret=LEPT_PARSE_ROOT_NOT_SINGULAR;
+    }
+    return ret;
 }
 
 lept_type lept_get_type(const lept_value* v)

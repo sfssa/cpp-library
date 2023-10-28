@@ -1,7 +1,7 @@
 #pragma once
 
 // JSON的不同类型
-typedef enum lept_type
+enum lept_type
 {
     LEPT_NULL,
     LEPT_FALSE,
