@@ -36,10 +36,10 @@ static int lept_parse_literal(lept_context* c,lept_value*v,const char* literal,l
     {
         if(c->json[i]!=literal[i+1])
             return LEPT_PARSE_INVALID_VALUE;
-        c->json+=i;
-        v->type=type;
-        return LEPT_PARSE_OK;
     }
+    c->json+=i;
+    v->type=type;
+    return LEPT_PARSE_OK;
 }
 
 static int lept_parse_number(lept_context* c,lept_value* v)
