@@ -8,9 +8,9 @@
 #define ISDIGIT(ch)         ((ch) >= '0' && (ch) <= '9')
 #define ISDIGIT1TO9(ch)     ((ch) >= '1' && (ch) <= '9')
 
-typedef struct {
+struct lept_context{
     const char* json;
-}lept_context;
+};
 
 static void lept_parse_whitespace(lept_context* c) {
     const char *p = c->json;

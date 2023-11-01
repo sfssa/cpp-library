@@ -17,11 +17,11 @@ const int LEPT_PARSE_STACK_INIT_SIZE=256;
 #define ISDIGIT1TO9(ch)     ((ch) >= '1' && (ch) <= '9')
 #define PUTC(c, ch)         do { *(char*)lept_context_push(c, sizeof(char)) = (ch); } while(0)
 
-typedef struct {
+struct lept_context{
     const char* json;
     char* stack;
     size_t size, top;
-}lept_context;
+};
 
 static void* lept_context_push(lept_context* c, size_t size) {
     void* ret;
