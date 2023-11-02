@@ -91,7 +91,7 @@
 - 索引节点：inode，记录文件的元信息。比如inode编号、文件大小、访问权限、创建时间，最后一次修改时间、在磁盘中的位置等。**索引节点是文件的唯一标识，一一对应，因此索引节点也占用磁盘空间。**
 - 目录项：dentry，用来记录文件的名字、索引节点指针以及和目录项层级关联关系。多个目录项关联在一起，就会形成目录结构。与索引节点不同的是，**目录项是由内核维护的一个数据结构，不存放于磁盘，而是缓存在内存。**
 
-![directory](E:\projects_code\wokedir\cpp_library\分布式服务器\static\directory.png)
+![directory](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/directory.png)
 
 根据索引节点和目录项的特点我们可以发现：一个目录项中可以包含多个索引节点，也就是说目录项和索引节点的关系是多对一，也就是一个文件可以被多个目录包含。比如，硬链接的实现就是多个目录项中的索引节点指向同一个文件。
 
@@ -139,7 +139,7 @@
 
 ​	在Linux文件系统中，用户空间、系统调用、虚拟机文件系统、缓存、文件系统以及存储之间的关系入下图所示：
 
-![VFS](E:\projects_code\wokedir\cpp_library\分布式服务器\static\VFS.png)
+![VFS](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/VFS.png)
 
 ​	Linux支持的文件系统有很多，根据存储位置的不同，可以将文件系统分为三类：
 
@@ -151,7 +151,7 @@
 
 ## 文件的使用
 
-![file_read_write](E:\projects_code\wokedir\cpp_library\分布式服务器\static\file_read_write.png)
+![file_read_write](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/file_read_write.png)
 
 ```c
 fd = open(name, flag); # 打开文件
@@ -227,7 +227,7 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 
 ​	因此，文件头里需要指定起始块的位置和长度，通过这两个信息可以表示文件存放方式是连续空间。（文件头类似于上文的inode）
 
-![file_storage](E:\projects_code\wokedir\cpp_library\分布式服务器\static\file_storage.png)
+![file_storage](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/file_storage.png)
 
 ​	连续存放的方式读写效率很高，支持随机访问，但是有磁盘空间碎片和文件长度不易扩展的缺陷。如下图所示：文件B被删除，磁盘上留下一块空缺，这时如果新来的文件小于其中一个空缺，我们可以将其放在相应空缺里。但如果该文件的大小大于所有的空缺，但是小于所有空缺空间之和，这就好导致虽然磁盘有足够的空间存放新的文件，但是却无法存放。通常操作系统提供了内存重组来重新调整文件所在磁盘位置来腾出新的空间来容纳新的文件，但是这个过程非常耗时，严重降低计算机的性能：
 
@@ -235,7 +235,7 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 2. **内存重分配（Memory Relocation）：** 在某些情况下，操作系统可以选择重新分配内存块，以便将它们放置在连续的地址空间中，从而减少碎片。
 3. **动态分配策略（Dynamic Allocation Strategies）：** 使用更智能的内存分配策略，可以在一定程度上减少内部碎片。例如，使用分区分配或伙伴系统来减少内存浪费。
 
-![shard](E:\projects_code\wokedir\cpp_library\分布式服务器\static\shard.png)
+![shard](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/shard.png)
 
 ​	还有一个问题就是不方便扩充，比如原来是100个字节的空间，结果文件现在被修改导致需要200个字节的空间，一个常用的解决办法是先找到另一块容量是200字节的空间，然后将原来的数据复制过去，之后将新数据插入到新的空间中，最后释放原来的空间，这也会降低计算机的性能。
 
@@ -245,11 +245,11 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 
 #### 链表
 
-	##### 隐式链表
+##### 隐式链表
 
 ​	实现方式是文件头包含文件第一块和最后一块位置，并且每个数据块里面留出一个指针空间，用来存放下一个数据块的位置。这样一个数据块连着下一个数据块，从链表头可以顺着指针找到所有的数据块，存放的空间可以是不连续的。除文件的最后一个盘块之外，每个盘块都存有指向下一个盘块的指针
 
-![link_view](E:\projects_code\wokedir\cpp_library\分布式服务器\static\link_unview.png)
+![link_view](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/link_unview.png)
 
 文件目录中记录存放该文件在外存中的**起始块号**和**结束块号**
 
@@ -268,7 +268,7 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 
 ​	把用于链接文件各物理块的指针显式地存放在一张表中，即**文件分配表（FAT）**。假设某个新创建的文件 “aaa” 依次存放在磁盘块 2 -> 5 -> 0 -> 1；假设某个新创建的文件 “bbb” 依次存放在磁盘块4 -> 23 -> 3。其文件分配表如下图所示：
 
-![link_unview](E:\projects_code\wokedir\cpp_library\分布式服务器\static\link_view.png)
+![link_unview](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/link_view.png)
 
 **注意：一个磁盘仅设置一张 FAT。开机时，将 FAT 读入内存，并常驻内存。**FAT 的各个表项在物理上连续存储，且每一个表项长度相同，因此，物理块号可以隐含
 
@@ -284,7 +284,7 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 
 **索引分配**允许文件离散地分配在各个磁盘块中，系统会**为每个文件建立一张索引表**，索引表中**记录了文件的各个逻辑块对应的物理块**（索引表的功能类似于内存管理中的页表——建立逻辑页面到物理页之间的映射关系）。索引表存放的磁盘块称为**索引块**，文件数据存放的磁盘块称为**数据块**
 
-![index](E:\projects_code\wokedir\cpp_library\分布式服务器\static\index.png)
+![index](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/index.png)
 
 ##### 链接索引
 
@@ -292,7 +292,7 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 
 ​	如果索引表太大，一个索引块装不下，那么可以将多个索引块链接起来存放
 
-![link_index](E:\projects_code\wokedir\cpp_library\分布式服务器\static\link_index.png)
+![link_index](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/link_index.png)
 
 **存在问题：**如果需要访问第 256 块，需要先调出 7 号物理块对应的索引块，然后遍历到 255 号，知道第二个索引块，然后才能访问到 256 号，效率极低
 
@@ -300,7 +300,7 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 
 建立多层索引（**原理类似于多级页表**）。使第一层索引块指向第二层的索引块。还可根据 文件大小的要求再建立第三层、第四层索引块
 
-![indexs](E:\projects_code\wokedir\cpp_library\分布式服务器\static\indexs.png)
+![indexs](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/indexs.png)
 
 假设磁盘块大小为 1KB，一个索引表项占 4B，则一个磁盘块只能存放 256 个索引
 
@@ -317,11 +317,11 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 
 ​	多种索引方式的结合。例如，一个文件的顶级索引表中，既包含**直接地址索引**（直接指向**数据块**），又包含**一级间接索引**（指向单层索引块），还包含**两级间接索引**（指向两层索引表）。
 
-![mix_index](E:\projects_code\wokedir\cpp_library\分布式服务器\static\mix_index.png)
+![mix_index](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/mix_index.png)
 
 其中Unix的文件存储方式就是同时组合了文件存放的优点，如下图所示：
 
-![unix](E:\projects_code\wokedir\cpp_library\分布式服务器\static\unix.png)
+![unix](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/unix.png)
 
 它是根据文件的大小，存放的方式会有所变化：
 
@@ -363,7 +363,7 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 - 多种索引分配方式的结合。例如，一个文件的顶级索引表中，既包含直接地址索引（直接指向数据块），又包含一级间接索引（指向单层索引表）、还包含两级间接索引（指向两层索引表）
 - **优点：**对于小文件来说，访问一个数据块所需的读磁盘次数更少
 
-![sumary](E:\projects_code\wokedir\cpp_library\分布式服务器\static\sumary.png)
+![sumary](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/sumary.png)
 
 ## 空闲空间存储
 
@@ -373,7 +373,7 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 
 ​	空闲表法就是为所有空闲空间建立一张表，表内容包括空闲区的第一个块号和该空闲区的块个数，注意，这个方式是连续分配的。如下图：
 
-![free_block](E:\projects_code\wokedir\cpp_library\分布式服务器\static\free_block.png)
+![free_block](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/free_block.png)
 
 ​	当请求分配磁盘空间时，系统依次扫描空闲表里的内容，直到找到一个合适的空闲区域为止。当用户撤销一个文件时，系统回收文件空间。这时，也需顺序扫描空闲表，寻找一个空闲表条目并将释放空间的第一个物理块号和它占用的块数填充到这个条目中。**这种方法在空闲区少时有较好的效果，如果存储空间中有大量的小的空闲区，那么空闲链表变得很大，这样查询效率很低。**另外，这种分配技术适合建立连续文件。
 
@@ -381,7 +381,7 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 
 ​	我们也可以使用「链表」的方式来管理空闲空间，每一个空闲块里有一个指针指向下一个空闲块，这样也能很方便的找到空闲块并管理起来。如下图：
 
-![free_blocks_tables](E:\projects_code\wokedir\cpp_library\分布式服务器\static\free_blocks_tables.png)
+![free_blocks_tables](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/free_blocks_tables.png)
 
 当创建文件需要一块或几块时，就从链头上依次取下一块或几块。反之，当回收空间时，把这些空闲块依次接到链头上。
 
@@ -412,7 +412,7 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 
 ​	**也就是说，采用一个块的位图+一系列的块，外加一个块的inode的位图+一系列的inode的结构最大能表示的空间只有128MB。**在Linux文件系统中，把这个结构称为一个块组，那么有N多的块组，就能表示N大的文件。下图给出了 Linux Ext2 整个文件系统的结构和块组的内容，文件系统都由大量块组组成，在硬盘上相继排布：
 
-![ext2](E:\projects_code\wokedir\cpp_library\分布式服务器\static\ext2.png)
+![ext2](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/ext2.png)
 
 最前面的第一个块是引导块，在系统启动时用于启用引导，接着后面就是一个一个连续的块组了，块组的内容如下： 
 
@@ -430,7 +430,7 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 
 ​	上面的内容都是文件的存储，那么目录该怎么存储呢？基于 Linux 一切皆文件的设计思想，目录其实也是个文件，你甚至可以通过 `vim` 打开它，它也有 inode，inode 里面也是指向一些块。和普通文件不同的是，**普通文件的块里面保存的是文件数据，而目录文件的块里面保存的是目录里面一项一项的文件信息。在目录文件的块中，最简单的保存格式就是列表，就是一项一项地将目录下的文件信息（如文件名、文件 inode、文件类型等）列在表里。列表中每一项就代表该目录下的文件的文件名和对应的 inode，通过这个 inode，就可以找到真正的文件。
 
-![directory_file](E:\projects_code\wokedir\cpp_library\分布式服务器\static\directory_file.png)
+![directory_file](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/directory_file.png)
 
 ​	通常，第一项是「`.`」，表示当前目录，第二项是「`..`」，表示上一级目录，接下来就是一项一项的文件名和 inode。如果一个目录有超级多的文件，我们要想在这个目录下找文件，按照列表一项一项的找，效率就不高了。
 
@@ -469,9 +469,7 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 -  在调用 `write` 的最后，当发现内核缓存的数据太多的时候，内核会把数据写到磁盘上； -
 - 用户主动调用 `sync`，内核缓存会刷到磁盘上； -
 - 当内存十分紧张，无法再分配页面时，也会把内核缓存的数据刷到磁盘上； -
-- 内核缓存的数据的缓存时间超过某个时间时，也会把数据刷到磁盘上；
-
-
+- 内核缓存的数据的缓存时间超过某个时间时，也会把数据刷到磁盘上
 
 ### 阻塞与非阻塞 I/O VS 同步与异步 I/O
 
@@ -481,11 +479,11 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 
 注意，**阻塞等待的是「内核数据准备好」和「数据从内核态拷贝到用户态」这两个过程**。过程如下图：
 
-![direct_IO](E:\projects_code\wokedir\cpp_library\分布式服务器\static\direct_IO.png)
+![direct_IO](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/direct_IO.png)
 
 知道了阻塞 I/O ，来看看**非阻塞 I/O**，非阻塞的 read 请求在数据未准备好的情况下立即返回，可以继续往下执行，此时应用程序不断轮询内核，直到数据准备好，内核将数据拷贝到应用程序缓冲区，`read` 调用才可以获取到结果。过程如下图：
 
-![block_io](E:\projects_code\wokedir\cpp_library\分布式服务器\static\block_io.png)
+![block_io](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/block_io.png)
 
 注意，**这里最后一次 read 调用，获取数据的过程，是一个同步的过程，是需要等待的过程。这里的同步指的是内核态的数据拷贝到用户程序的缓存区这个过程。**
 
@@ -497,7 +495,7 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 
 下图是使用 select I/O 多路复用过程。注意，`read` 获取数据的过程（数据从内核态拷贝到用户态的过程），也是一个**同步的过程**，需要等待：
 
-![poll_select](E:\projects_code\wokedir\cpp_library\分布式服务器\static\poll_select.png)
+![poll_select](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/poll_select.png)
 
 实际上，无论是阻塞 I/O、非阻塞 I/O，还是基于非阻塞 I/O 的多路复用**都是同步调用。因为它们在 read 调用时，内核将数据从内核空间拷贝到应用程序空间，过程都是需要等待的，也就是说这个过程是同步的，如果内核实现的拷贝效率不高，read 调用就会在这个同步过程中等待比较长的时间。**
 
@@ -505,7 +503,7 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 
 当我们发起 `aio_read` 之后，就立即返回，内核自动将数据从内核空间拷贝到应用程序空间，这个拷贝过程同样是异步的，内核自动完成的，和前面的同步操作不一样，应用程序并不需要主动发起拷贝动作。过程如下图：
 
-![aio_read](E:\projects_code\wokedir\cpp_library\分布式服务器\static\aio_read.png)
+![aio_read](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/aio_read.png)
 
 在前面我们知道了，I/O 是分为两个过程的： 
 
@@ -542,7 +540,7 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 
 ## FastDFS架构
 
-![fastdfs_framework](E:\projects_code\wokedir\cpp_library\分布式服务器\static\fastdfs_framework.jpg)
+![fastdfs_framework](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/fastdfs_framework.jpg)
 
 ## Tracker Server
 
@@ -578,11 +576,11 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 
 上传：
 
-![fdfs-file-upload](E:\projects_code\wokedir\cpp_library\分布式服务器\static\fdfs-file-upload.png)
+![fdfs-file-upload](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/fdfs-file-upload.png)
 
 下载：
 
-![fdfs-file-down](E:\projects_code\wokedir\cpp_library\分布式服务器\static\fdfs-file-down.png)
+![fdfs-file-down](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/fdfs-file-down.png)
 
 ## Group
 
@@ -630,7 +628,7 @@ Linux通过文件描述符找到进程打开的文件的简要过程如下所示
 
 在`/usr/bin`目录中进行查找，执行命令：`ls -al /usr/bin/ | grep fdfs_`后显示如下：
 
-![image-20231102202929528](C:\Users\16645\AppData\Roaming\Typora\typora-user-images\image-20231102202929528.png)
+![image-20231102202929528](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/fdfs_list.png)
 
 # 修改配置文件
 
@@ -680,7 +678,7 @@ fdfs_trackerd /etc/fsfs/tracker.conf restart
 
 启动成功后，通过`ps aux | grep tracker`检验:
 
-![tracker_status](E:\projects_code\wokedir\cpp_library\分布式服务器\static\tracker_status.png)
+![tracker_status](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/tracker_status.png)
 
 ## 配置并启动Storage-第二个启动（守护进程）
 
@@ -724,7 +722,7 @@ fdfs_storaged /etc/fdfs/stroga.conf stop
 fdfs_storaged /etc/fdfs/stroga.conf restart
 ```
 
-![storage_list](E:\projects_code\wokedir\cpp_library\分布式服务器\static\storage_list.png)
+![storage_list](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/storage_list.png)
 
 ## 修改客户端配置-最后启动（普通进程）
 
@@ -847,7 +845,7 @@ fdfs_monitor /etc/fdfs/client.conf
     - 读管道 -> 内存
     - 内存数据写数据库
 
-![simple_client](E:\projects_code\wokedir\cpp_library\分布式服务器\static\simple_client.png)
+![simple_client](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/simple_client.png)
 
 ```
 #include <stdio.h>
