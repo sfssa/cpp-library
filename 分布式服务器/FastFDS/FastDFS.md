@@ -34,7 +34,7 @@
 
 **代表**：EXT2、EXT3、EXT4、NTFS、FAT、FAT32、XFS、JFS 等等。
 
-![tradition_file_system](E:\projects_code\wokedir\cpp_library\分布式服务器\static\tradition_file_system.png)
+![tradition_file_system](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/tradition_file_system.png)
 
 ## 网络文件系统
 
@@ -56,7 +56,7 @@
 
 　　**代表**：HDFS（ASF）、MogileFS（LiveJournal）、FastDFS（余庆）、Lustre（Oracle）、GlusterFS（RedHat）等等。
 
-![distribute_file_system](E:\projects_code\wokedir\cpp_library\分布式服务器\static\distribute_file_system.png)
+![distribute_file_system](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/distribute_file_system.png)
 
 ### 通用型
 
@@ -78,7 +78,7 @@
 
 ​	文件系统（File System）是一种用于组织和管理计算机上的数据的方法，它定义了文件和目录的结构，以及如何存储、访问和维护这些数据。文件系统是操作系统的一部分，负责管理文件和数据的物理存储、访问权限、文件的元数据（例如文件名、大小、创建日期、修改日期等），以及文件的组织结构（目录结构）。
 
-![FileSystem](E:\projects_code\wokedir\cpp_library\分布式服务器\static\FileSystem.png)
+![FileSystem](https://github.com/sfssa/cpp-library/blob/master/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/FastFDS/static/FileSystem.png)
 
 ## 文件系统的基本组成
 
