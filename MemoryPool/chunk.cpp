@@ -1,30 +1,5 @@
 #include "chunk.h"
 
-int Chunk::getCapacity() const
-{
-    return capacity;
-}
-
-int Chunk::getLength() const
-{
-    return length;
-}
-
-int Chunk::getHead() const
-{
-    return head;
-}
-
-char* Chunk::getData() const
-{
-    return data;
-}
-
-Chunk* Chunk::getNext()
-{
-    return next;
-}
-
 Chunk::Chunk(size_t size)
     :capacity(size),data(new char[size]),length(0),head(0),next(nullptr)
 {
@@ -36,11 +11,6 @@ Chunk::~Chunk()
     if(data)
         delete[] data;
     // 处理指向下一个内存块的指针
-}
-
-void Chunk::setLength(size_t len)
-{
-    length=len;
 }
 
 void Chunk::clear()
@@ -71,7 +41,7 @@ void Chunk::pop(size_t len)
     head+=len;
 }
 
-void Chunk::printData()
+void Chunk::print_data()
 {
     int temp=head;
     for(int i=0;i<length;++i)

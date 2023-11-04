@@ -28,20 +28,12 @@ public:
 
     // 声明这个已经被弃用
     //[[deprecate("chunk debug api deprecated"!)]]
-    void printData();
+    void print_data();
 
-    int getCapacity() const;
-    int getLength() const;
-    void setLength(size_t leng);
-    int getHead() const;
-    char* getData() const;
-    Chunk* getNext();
-
-private:
+    Chunk* next;        // 下一个内存块指针
     int capacity;       // 内存块最大可使用空间
     int length;         // 内存块已经使用的空间
     int head;           // 存放数据的数组的偏移量
     char* data;         // 指向实际的数据存储区域
-    Chunk* next;        // 下一个内存块指针
 };
 
