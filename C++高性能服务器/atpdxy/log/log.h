@@ -11,16 +11,15 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <map>
-// #include "../utils/utils.h"
-// #include "../design/singleton.h"
+#include "../utils/utils.h"
+#include "../design/singleton.h"
 // #include "../thread/thread.h"
 
 // 使用流式方式将日志级别为level的日志写入到logger
 #define ATPDXY_LOG_LEVEL(logger,level) \
     if(logger->getLevel()<=level) \
         atpdxy::LogEventWrap(atpdxy::LogEvent::ptr(new atpdxy::LogEvent(logger,level, \
-            __FILE__,__LINE__,0,atpdxy::getThreadId(),atpdxy::getFiberId(),time(0), \
-            atpdxy::Thread::getName()))).getSS()
+            __FILE__,__LINE__,0,atpdxy::getThreadId(),atpdxy::getFiberId(),time(0)))).getSS()
 
 // 使用流方式将日志级别debug的日志写入logger
 #define ATPDXY_LOG_DEBUG(logger) ATPDXY_LOG_LEVEL(logger,atpdxy::LogLevel::DEBUG)
@@ -41,8 +40,7 @@
 #define ATPDXY_LOG_FMT_LEVEL(logger,level,fmt,...) \
     if(logger->getLevel()<=level) \
         atpdxy::LogEventWrap(atpdxy::LogEvent::ptr(new atpdxy::LogEvent(logger,level, \
-            __FILE__,__LINE__,0,sylar::getThreadId(),atpdxy::getFiberId(),time(0), \
-            atpdxy::Thread::getName()))).getEvent()->format(fmt,__VA_ARGS__)
+            __FILE__,__LINE__,0,atpdxy::getThreadId(),atpdxy::getFiberId(),time(0)))).getEvent()->format(fmt,__VA_ARGS__)
 
 // 使用格式化方式将日志级别为debug的日志写入logger
 #define ATPDXY_LOG_FMT_DEBUG(logger,fmt,...) ATPDXY_LOG_FMT_LEVEL(logger,atpdxy::LogLevel::DEBUG,fmt,__VA_ARGS__)
@@ -64,6 +62,7 @@
 
 // 获取名为name的日志器
 #define ATPDXY_LOG_NAME(name) atpdxy::LoggerMgr::getInstance().getLogger(name
+
 namespace atpdxy
 {
 
@@ -100,7 +99,7 @@ public:
         const char* file,int32_t line,uint32_t elapse,uint32_t thread_id,
         uint32_t fiber_id,uint64_t time,const std::string& thread_name);
 
-    LogEvent(const char* file,int32_t line,uint32_t elapse,uint32_t thread_id
+    LogEvent(std::shared_ptr<Logger> logger,LogLevel::Level level,const char* file,int32_t line,uint32_t elapse,uint32_t thread_id
         ,uint32_t fiber_id,uint64_t time);
     // 返回文件名
     const char* getFile() const 
@@ -433,6 +432,6 @@ private:
     Logger::ptr m_root_;                            // 主日志器
 };
 
-// typedef atpdxy::Singleton<LoggerManager> LoggerMgr;
+ typedef atpdxy::Singleton<LoggerManager> LoggerMgr;
 }
 

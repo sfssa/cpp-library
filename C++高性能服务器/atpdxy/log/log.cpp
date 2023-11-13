@@ -101,10 +101,10 @@ LogEvent::LogEvent(std::shared_ptr<Logger> logger,LogLevel::Level level
 
 }
 
-LogEvent::LogEvent(const char* file,int32_t line,uint32_t elapse,uint32_t thread_id
+LogEvent::LogEvent(std::shared_ptr<Logger> logger,LogLevel::Level level,const char* file,int32_t line,uint32_t elapse,uint32_t thread_id
         ,uint32_t fiber_id,uint64_t time)
-    :m_file_(file),m_line_(line),m_elapse_(elapse),m_thread_id_(thread_id)
-    ,m_fiber_id_(fiber_id),m_time_(time)
+    :m_file_(file),m_line_(line),m_elapse_(elapse),m_thread_id_(thread_id),m_fiber_id_(fiber_id),
+    m_time_(time),m_logger_(logger),m_level_(level)
 {
 
 }
@@ -201,7 +201,7 @@ public:
 
     void format(std::ostream& os,Logger::ptr logger,LogLevel::Level level,LogEvent::ptr event) override
     {
-        os<<event->getThreadId();
+        os<<event->getThreadName();
     }
 };
 
@@ -960,6 +960,7 @@ struct LogDefine
 //         });
 //     }
 // };
+
 
 // static LogIniter __log_init;
 
