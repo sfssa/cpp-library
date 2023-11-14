@@ -1,4 +1,4 @@
-# Install script for directory: /home/pzx/C++高性能服务器
+# Install script for directory: /home/pzx/GitHub/cpp-library/C++高性能服务器
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/pzx/C++高性能服务器/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/pzx/GitHub/cpp-library/C++高性能服务器/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

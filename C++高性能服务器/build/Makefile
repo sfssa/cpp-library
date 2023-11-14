@@ -60,10 +60,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pzx/C++高性能服务器
+CMAKE_SOURCE_DIR = /home/pzx/GitHub/cpp-library/C++高性能服务器
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pzx/C++高性能服务器/build
+CMAKE_BINARY_DIR = /home/pzx/GitHub/cpp-library/C++高性能服务器/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -90,9 +90,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pzx/C++高性能服务器/build/CMakeFiles /home/pzx/C++高性能服务器/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pzx/GitHub/cpp-library/C++高性能服务器/build/CMakeFiles /home/pzx/GitHub/cpp-library/C++高性能服务器/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pzx/C++高性能服务器/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pzx/GitHub/cpp-library/C++高性能服务器/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -133,17 +133,54 @@ atpdxy/fast:
 .PHONY : atpdxy/fast
 
 #=============================================================================
-# Target rules for targets named test
+# Target rules for targets named test_log
 
 # Build rule for target.
-test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test
-.PHONY : test
+test_log: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_log
+.PHONY : test_log
 
 # fast build rule for target.
-test/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
-.PHONY : test/fast
+test_log/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_log.dir/build.make CMakeFiles/test_log.dir/build
+.PHONY : test_log/fast
+
+#=============================================================================
+# Target rules for targets named test_config
+
+# Build rule for target.
+test_config: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_config
+.PHONY : test_config
+
+# fast build rule for target.
+test_config/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_config.dir/build.make CMakeFiles/test_config.dir/build
+.PHONY : test_config/fast
+
+atpdxy/config/config.o: atpdxy/config/config.cpp.o
+.PHONY : atpdxy/config/config.o
+
+# target to build an object file
+atpdxy/config/config.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/atpdxy.dir/build.make CMakeFiles/atpdxy.dir/atpdxy/config/config.cpp.o
+.PHONY : atpdxy/config/config.cpp.o
+
+atpdxy/config/config.i: atpdxy/config/config.cpp.i
+.PHONY : atpdxy/config/config.i
+
+# target to preprocess a source file
+atpdxy/config/config.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/atpdxy.dir/build.make CMakeFiles/atpdxy.dir/atpdxy/config/config.cpp.i
+.PHONY : atpdxy/config/config.cpp.i
+
+atpdxy/config/config.s: atpdxy/config/config.cpp.s
+.PHONY : atpdxy/config/config.s
+
+# target to generate assembly for a file
+atpdxy/config/config.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/atpdxy.dir/build.make CMakeFiles/atpdxy.dir/atpdxy/config/config.cpp.s
+.PHONY : atpdxy/config/config.cpp.s
 
 atpdxy/log/log.o: atpdxy/log/log.cpp.o
 .PHONY : atpdxy/log/log.o
@@ -193,12 +230,36 @@ atpdxy/utils/utils.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/atpdxy.dir/build.make CMakeFiles/atpdxy.dir/atpdxy/utils/utils.cpp.s
 .PHONY : atpdxy/utils/utils.cpp.s
 
+test/test_config.o: test/test_config.cpp.o
+.PHONY : test/test_config.o
+
+# target to build an object file
+test/test_config.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_config.dir/build.make CMakeFiles/test_config.dir/test/test_config.cpp.o
+.PHONY : test/test_config.cpp.o
+
+test/test_config.i: test/test_config.cpp.i
+.PHONY : test/test_config.i
+
+# target to preprocess a source file
+test/test_config.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_config.dir/build.make CMakeFiles/test_config.dir/test/test_config.cpp.i
+.PHONY : test/test_config.cpp.i
+
+test/test_config.s: test/test_config.cpp.s
+.PHONY : test/test_config.s
+
+# target to generate assembly for a file
+test/test_config.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_config.dir/build.make CMakeFiles/test_config.dir/test/test_config.cpp.s
+.PHONY : test/test_config.cpp.s
+
 test/test_log.o: test/test_log.cpp.o
 .PHONY : test/test_log.o
 
 # target to build an object file
 test/test_log.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test/test_log.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_log.dir/build.make CMakeFiles/test_log.dir/test/test_log.cpp.o
 .PHONY : test/test_log.cpp.o
 
 test/test_log.i: test/test_log.cpp.i
@@ -206,7 +267,7 @@ test/test_log.i: test/test_log.cpp.i
 
 # target to preprocess a source file
 test/test_log.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test/test_log.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_log.dir/build.make CMakeFiles/test_log.dir/test/test_log.cpp.i
 .PHONY : test/test_log.cpp.i
 
 test/test_log.s: test/test_log.cpp.s
@@ -214,7 +275,7 @@ test/test_log.s: test/test_log.cpp.s
 
 # target to generate assembly for a file
 test/test_log.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test/test_log.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_log.dir/build.make CMakeFiles/test_log.dir/test/test_log.cpp.s
 .PHONY : test/test_log.cpp.s
 
 # Help Target
@@ -226,13 +287,20 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... atpdxy"
-	@echo "... test"
+	@echo "... test_config"
+	@echo "... test_log"
+	@echo "... atpdxy/config/config.o"
+	@echo "... atpdxy/config/config.i"
+	@echo "... atpdxy/config/config.s"
 	@echo "... atpdxy/log/log.o"
 	@echo "... atpdxy/log/log.i"
 	@echo "... atpdxy/log/log.s"
 	@echo "... atpdxy/utils/utils.o"
 	@echo "... atpdxy/utils/utils.i"
 	@echo "... atpdxy/utils/utils.s"
+	@echo "... test/test_config.o"
+	@echo "... test/test_config.i"
+	@echo "... test/test_config.s"
 	@echo "... test/test_log.o"
 	@echo "... test/test_log.i"
 	@echo "... test/test_log.s"

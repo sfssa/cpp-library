@@ -58,10 +58,10 @@
 #define ATPDXY_LOG_FMT_FATAL(logger,fmt,...) ATPDXY_LOG_FMT_LEVEL(logger,atpdxy::LogLevel::FATAL,fmt,__VA_ARGS__)
 
 // 获取主日志器
-#define ATPDXY_LOG_ROOT() atpdxy::LoggerMgr::getInstance().getRoot()
+#define ATPDXY_LOG_ROOT() atpdxy::LoggerMgr::getInstance()->getRoot()
 
 // 获取名为name的日志器
-#define ATPDXY_LOG_NAME(name) atpdxy::LoggerMgr::getInstance().getLogger(name
+#define ATPDXY_LOG_NAME(name) atpdxy::LoggerMgr::getInstance()->getLogger(name
 
 namespace atpdxy
 {
