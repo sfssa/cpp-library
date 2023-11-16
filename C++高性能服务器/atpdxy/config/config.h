@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-11-13 18:14:11
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-11-14 23:26:19
+ * @LastEditTime: 2023-11-16 22:14:51
  * @FilePath: /cpp-library/C++高性能服务器/atpdxy/config/config.h
  * @Description: 
  * 
@@ -19,8 +19,11 @@
 #include <set>
 #include <unordered_map>
 #include <unordered_set>
+#include <functional>
 #include <list>
 #include "../log/log.h"
+#include "../utils/utils.h"
+
 namespace atpdxy
 {
 
@@ -287,11 +290,15 @@ public:
 // 后两个类是为了转换成string和从string转换成我们要的
 // FromStr T operator() (const std::string&)
 // ToStr std::string operator() (const T&)
-template <class T,class FromStr=LexicalCast<std::string,T>,class ToStr=LexicalCast<T,std::string>>
+template <class T,class FromStr=LexicalCast<std::string,T>
+        ,class ToStr=LexicalCast<T,std::string>>
 class ConfigVar:public ConfigVarBase
 {
 public:
     typedef std::shared_ptr<ConfigVar> ptr;
+    // 当配置发生变化的回调函数
+    typedef std::function<void (const T& old_value,const T& new_value)> on_change_cb;
+    
     ConfigVar(const std::string& name,const T& default_value,const std::string& description="")
         :ConfigVarBase(name,description),m_val(default_value)
     {
@@ -299,13 +306,25 @@ public:
     }
 
     const T getValue() const {return m_val;}
-    void setValue(const T& val) {m_val=val;}
+
+    void setValue(const T& val) 
+    {
+        if(val==m_val)
+        {
+            return;
+        }
+        for(auto& i : m_cbs)
+            i.second(m_val,val);// 执行回调函数
+        m_val=val;
+    }
+
     std::string getTypeName() const override {return typeid(T).name();}
 
     std::string toString() override
     {
         try{
             // return boost::lexical_cast<std::string>(m_val);
+            // 创造一个ToStr()实例，然后通过operator()调用这个实例(仿函数)
             return ToStr()(m_val);
         }catch(std::exception& e){
             ATPDXY_LOG_ERROR(ATPDXY_LOG_ROOT())<<"ConfigVar::toString exception"
@@ -325,8 +344,38 @@ public:
         }
         return false;
     }
+
+    // void addListener(uint64_t key,on_change_cb cb)
+    // {
+    //     m_cbs[key]=cb;
+    // }
+    uint64_t addListener(on_change_cb cb)
+    {
+        static uint64_t s_fun_id=0;
+        ++s_fun_id;
+        m_cbs[s_fun_id]=cb;
+        return s_fun_id;
+    }
+
+    void delListener(uint64_t key)
+    {
+        m_cbs.erase(key);
+    }
+
+    on_change_cb getListener(uint64_t key)
+    {
+        auto it=m_cbs.find(key);
+        return it==m_cbs.end()?nullptr:it->second;
+    }
+
+    void clearListener()
+    {
+        m_cbs.clear();
+    }
 private:
     T m_val;
+    // 变更回调函数组，函数指针没有比较函数，因此采用map来解决，通过key找到函数指针来删除
+    std::map<uint64_t,on_change_cb> m_cbs;
 };
 
 class Config
@@ -346,8 +395,8 @@ public:
         const std::string& description="")
     {
         // auto tmp=lookUp<T>(name);
-        auto it=s_datas.find(name);
-        if(it!=s_datas.end())
+        auto it=getDatas().find(name);
+        if(it!=getDatas().end())
         {
             // 将it->second转换成ConfigVar，it->second是一个基类指针，T可能与实际数据类型不符合
             // it->second是一个ConfigVarBase类型的智能指针，但期望它是一个ConfigVar类型的对象，
@@ -373,7 +422,7 @@ public:
             throw std::invalid_argument(name);
         }
         typename ConfigVar<T>::ptr v(new ConfigVar<T>(name,default_value,description));
-        s_datas[name]=v;
+        getDatas()[name]=v;
         return v;
     }
 
@@ -384,8 +433,8 @@ public:
     template <class T>
     static typename ConfigVar<T>::ptr lookUp(const std::string& name)
     {
-        auto it=s_datas.find(name);
-        if(it==s_datas.end())
+        auto it=getDatas().find(name);
+        if(it==getDatas().end())
             return nullptr;
         return std::dynamic_pointer_cast<ConfigVar<T>>(it->second);
     }
@@ -393,7 +442,11 @@ public:
     static void loadFromYaml(const YAML::Node& root);
     static ConfigVarBase::ptr lookupBase(const std::string& name);
 private:
-    static ConfigVarMap s_datas;
+    static ConfigVarMap& getDatas()
+    {
+        static ConfigVarMap s_datas;
+        return s_datas;
+    }
 };
 
 }

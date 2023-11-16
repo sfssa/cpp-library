@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-11-13 18:14:11
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-11-14 13:49:31
+ * @LastEditTime: 2023-11-16 22:11:21
  * @FilePath: /cpp-library/C++高性能服务器/atpdxy/config/config.cpp
  * @Description:    
  * 
@@ -12,7 +12,7 @@
 
 namespace atpdxy {
 
-Config::ConfigVarMap Config::s_datas;
+// Config::ConfigVarMap Config::s_datas;
 
 // 递归遍历YAML节点，将节点和名称存储到output中
 static void listAllMember(const std::string& prefix,const YAML::Node& node,std::list<std::pair<std::string,const YAML::Node>>& output)
@@ -67,7 +67,7 @@ void Config::loadFromYaml(const YAML::Node& root)
 // 查找当前命名的项
 ConfigVarBase::ptr Config::lookupBase(const std::string& name)
 {
-    auto it =s_datas.find(name);
-    return it==s_datas.end()?nullptr:it->second;
+    auto it =getDatas().find(name);
+    return it==getDatas().end()?nullptr:it->second;
 }
 }

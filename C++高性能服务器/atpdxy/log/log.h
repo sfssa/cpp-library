@@ -61,7 +61,7 @@
 #define ATPDXY_LOG_ROOT() atpdxy::LoggerMgr::getInstance()->getRoot()
 
 // 获取名为name的日志器
-#define ATPDXY_LOG_NAME(name) atpdxy::LoggerMgr::getInstance()->getLogger(name
+#define ATPDXY_LOG_NAME(name) atpdxy::LoggerMgr::getInstance()->getLogger(name)
 
 namespace atpdxy
 {
