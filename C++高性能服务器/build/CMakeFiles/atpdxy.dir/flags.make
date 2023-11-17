@@ -6,5 +6,11 @@ CXX_DEFINES = -Datpdxy_EXPORTS
 
 CXX_INCLUDES = -I/home/pzx/GitHub/cpp-library/C++高性能服务器/.
 
-CXX_FLAGS =  -rdynamic -O3 -g -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function -fPIC
+CXX_FLAGS =  -rdynamic -O3 -g -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function -Wno-builtin-macro-redefined -fPIC
+
+# Custom defines: CMakeFiles/atpdxy.dir/atpdxy/log/log.cpp.o_DEFINES = __FILE__="atpdxy/log/log.cpp"
+
+# Custom defines: CMakeFiles/atpdxy.dir/atpdxy/utils/utils.cpp.o_DEFINES = __FILE__="atpdxy/utils/utils.cpp"
+
+# Custom defines: CMakeFiles/atpdxy.dir/atpdxy/config/config.cpp.o_DEFINES = __FILE__="atpdxy/config/config.cpp"
 

@@ -665,3 +665,8 @@
 
 总体来说，通过基于日志级别选择是否输出日志，你可以在日志记录过程中实现更细粒度的控制和优化，以适应各种应用场景。
 
+# 整体流程
+
+![logger1](https://github.com/sfssa/cpp-library/blob/master/C%2B%2B%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8/static/logger1.png)
+
+![logger2](https://github.com/sfssa/cpp-library/blob/master/C%2B%2B%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8/static/logger2.png)

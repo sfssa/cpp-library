@@ -6,5 +6,7 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/pzx/GitHub/cpp-library/C++高性能服务器/.
 
-CXX_FLAGS =  -rdynamic -O3 -g -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function
+CXX_FLAGS =  -rdynamic -O3 -g -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function -Wno-builtin-macro-redefined
+
+# Custom defines: CMakeFiles/test_log.dir/test/test_log.cpp.o_DEFINES = __FILE__="test/test_log.cpp"
 
