@@ -10,27 +10,43 @@ include_directories(.)
 include_directories(/usr/local/include)
 link_directories(/usr/local/lib)
 
-find_library(YAMLCPP libyaml-cpp.a)
-message("***", ${YAMLCPP})
+# find_library(YAMLCPP libyaml-cpp.a)
+# message("***", ${YAMLCPP})
 
 set(LIB_SRC
     atpdxy/log/log.cpp
     atpdxy/utils/utils.cpp
     atpdxy/config/config.cpp
+    atpdxy/thread/thread.cpp
 )
 
 add_library(atpdxy SHARED ${LIB_SRC})
 force_redefine_file_macro_for_sources(atpdxy) #__FILE__
 
+find_library(YAMLCPP yaml-cpp)
+find_library(PTHREAD pthread)
+
+set (LIBS
+    atpdxy
+    pthread
+    yaml-cpp)
+
+message("***" ${LIBS})
+
 add_executable(test_log test/test_log.cpp)
 add_dependencies(test_log atpdxy)
 force_redefine_file_macro_for_sources(test_log)
-target_link_libraries(test_log atpdxy ${YAMLCPP})
+target_link_libraries(test_log ${LIBS})
 
 add_executable(test_config test/test_config.cpp)
 add_dependencies(test_config atpdxy)
 force_redefine_file_macro_for_sources(test_config)
-target_link_libraries(test_config atpdxy ${YAMLCPP})
+target_link_libraries(test_config ${LIBS})
+
+add_executable(test_thread test/test_thread.cpp)
+add_dependencies(test_thread atpdxy)
+force_redefine_file_macro_for_sources(test_thread)
+target_link_libraries(test_thread ${LIBS})
 
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)

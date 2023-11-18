@@ -96,7 +96,6 @@ test_log_EXTERNAL_OBJECTS =
 /home/pzx/GitHub/cpp-library/C++高性能服务器/bin/test_log: CMakeFiles/test_log.dir/test/test_log.cpp.o
 /home/pzx/GitHub/cpp-library/C++高性能服务器/bin/test_log: CMakeFiles/test_log.dir/build.make
 /home/pzx/GitHub/cpp-library/C++高性能服务器/bin/test_log: /home/pzx/GitHub/cpp-library/C++高性能服务器/lib/libatpdxy.so
-/home/pzx/GitHub/cpp-library/C++高性能服务器/bin/test_log: /usr/local/lib/libyaml-cpp.a
 /home/pzx/GitHub/cpp-library/C++高性能服务器/bin/test_log: CMakeFiles/test_log.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pzx/GitHub/cpp-library/C++高性能服务器/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/pzx/GitHub/cpp-library/C++高性能服务器/bin/test_log"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_log.dir/link.txt --verbose=$(VERBOSE)

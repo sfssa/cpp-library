@@ -1,5 +1,6 @@
 /home/pzx/GitHub/cpp-library/C++高性能服务器/build/CMakeFiles/atpdxy.dir
 /home/pzx/GitHub/cpp-library/C++高性能服务器/build/CMakeFiles/test_log.dir
 /home/pzx/GitHub/cpp-library/C++高性能服务器/build/CMakeFiles/test_config.dir
+/home/pzx/GitHub/cpp-library/C++高性能服务器/build/CMakeFiles/test_thread.dir
 /home/pzx/GitHub/cpp-library/C++高性能服务器/build/CMakeFiles/edit_cache.dir
 /home/pzx/GitHub/cpp-library/C++高性能服务器/build/CMakeFiles/rebuild_cache.dir
