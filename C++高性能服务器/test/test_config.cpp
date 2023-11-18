@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-11-13 22:52:46
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-11-16 23:30:46
+ * @LastEditTime: 2023-11-19 00:24:37
  * @FilePath: /cpp-library/C++高性能服务器/test/test_config.cpp
  * @Description: 
  * 
@@ -75,7 +75,7 @@ void print_yaml(const YAML::Node& node,int level)
 
 void test_yaml()
 {
-    YAML::Node root=YAML::LoadFile("/home/pzx/GitHub/cpp-library/C++高性能服务器/bin/conf/test.yml");
+    YAML::Node root=YAML::LoadFile("/home/pzx/GitHub/cpp-library/C++高性能服务器/bin/conf/log.yml");
     print_yaml(root,0);
 }
 
@@ -124,7 +124,7 @@ void test_config()
     XX_M(g_str_int_map_value_config, str_int_map, before);
     XX_M(g_str_int_umap_value_config, str_int_umap, before);
 
-    YAML::Node root =YAML::LoadFile("/home/pzx/GitHub/cpp-library/C++高性能服务器/bin/conf/test.yml");
+    YAML::Node root =YAML::LoadFile("/home/pzx/GitHub/cpp-library/C++高性能服务器/bin/conf/log.yml");
     atpdxy::Config::loadFromYaml(root);
 
     ATPDXY_LOG_INFO(ATPDXY_LOG_ROOT())<<"after: "<<g_int_value_config->getValue();
@@ -226,7 +226,7 @@ void test_class()
     XX_PM(g_person_map, "class.map before");
     ATPDXY_LOG_INFO(ATPDXY_LOG_ROOT()) << "before: " << g_person_vec_map->toString();
     // ATPDXY_LOG_INFO(ATPDXY_LOG_ROOT())<<"before: "<<g_person_map->toString();
-    YAML::Node root=YAML::LoadFile("/home/pzx/GitHub/cpp-library/C++高性能服务器/bin/conf/test.yml");
+    YAML::Node root=YAML::LoadFile("/home/pzx/GitHub/cpp-library/C++高性能服务器/bin/conf/log.yml");
     atpdxy::Config::loadFromYaml(root);
     // ATPDXY_LOG_INFO(ATPDXY_LOG_ROOT())<<"before: "<<g_person_map->toString();
     ATPDXY_LOG_INFO(ATPDXY_LOG_ROOT()) << "after: " << g_person->getValue().toString() << " - " << g_person->toString();
@@ -256,5 +256,11 @@ int main()
     // test_config();
     // test_class();
     test_log();
+    atpdxy::Config::Visit([](atpdxy::ConfigVarBase::ptr var){
+        ATPDXY_LOG_INFO(ATPDXY_LOG_ROOT())<<"name="<<var->getName()
+            <<" description:"<<var->getDescription()
+            <<" typename="<<var->getTypeName()
+            <<" value="<<var->toString();
+    });
     return 0;
 }

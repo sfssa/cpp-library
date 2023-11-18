@@ -730,6 +730,13 @@ CMakeFiles/test_thread.dir/test/test_thread.cpp.o: /home/pzx/GitHub/cpp-library/
   /usr/local/include/yaml-cpp/node/emit.h \
   /usr/include/c++/9/unordered_set \
   /usr/include/c++/9/bits/unordered_set.h \
+  /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/thread/thread.h \
+  /usr/include/c++/9/thread \
+  /usr/include/c++/9/chrono \
+  /usr/include/c++/9/ratio \
+  /usr/include/c++/9/bits/parse_numbers.h \
+  /usr/include/semaphore.h \
+  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
   /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/log/log.h \
   /usr/include/c++/9/fstream \
   /usr/include/x86_64-linux-gnu/c++/9/bits/basic_file.h \
@@ -741,21 +748,8 @@ CMakeFiles/test_thread.dir/test/test_thread.cpp.o: /home/pzx/GitHub/cpp-library/
   /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
   /usr/include/x86_64-linux-gnu/bits/syscall.h \
   /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/design/singleton.h \
-  /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/utils/noncopyable.h \
-  /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/thread/thread.h \
-  /usr/include/c++/9/thread \
-  /usr/include/c++/9/chrono \
-  /usr/include/c++/9/ratio \
-  /usr/include/c++/9/bits/parse_numbers.h
+  /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/utils/noncopyable.h
 
-
-/usr/include/c++/9/bits/parse_numbers.h:
-
-/usr/include/c++/9/ratio:
-
-/usr/include/c++/9/chrono:
-
-/usr/include/c++/9/thread:
 
 /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/utils/noncopyable.h:
 
@@ -774,6 +768,16 @@ CMakeFiles/test_thread.dir/test/test_thread.cpp.o: /home/pzx/GitHub/cpp-library/
 /usr/include/c++/9/fstream:
 
 /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/log/log.h:
+
+/usr/include/semaphore.h:
+
+/usr/include/c++/9/bits/parse_numbers.h:
+
+/usr/include/c++/9/ratio:
+
+/usr/include/c++/9/chrono:
+
+/usr/include/c++/9/thread:
 
 /usr/local/include/yaml-cpp/node/emit.h:
 
@@ -1662,6 +1666,8 @@ CMakeFiles/test_thread.dir/test/test_thread.cpp.o: /home/pzx/GitHub/cpp-library/
 /usr/include/c++/9/bits/locale_classes.h:
 
 /usr/include/boost/mpl/lambda.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/semaphore.h:
 
 /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 

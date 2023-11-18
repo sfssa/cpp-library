@@ -239,8 +239,24 @@ CMakeFiles/test_log.dir/test/test_log.cpp.o: /home/pzx/GitHub/cpp-library/C++高
   /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
   /usr/include/x86_64-linux-gnu/bits/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
-  /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/design/singleton.h
+  /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/design/singleton.h \
+  /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/thread/thread.h \
+  /usr/include/c++/9/functional \
+  /usr/include/c++/9/bits/std_function.h \
+  /usr/include/semaphore.h \
+  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+  /usr/include/c++/9/atomic
 
+
+/usr/include/x86_64-linux-gnu/bits/semaphore.h:
+
+/usr/include/semaphore.h:
+
+/usr/include/c++/9/bits/std_function.h:
+
+/usr/include/c++/9/functional:
+
+/home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/thread/thread.h:
 
 /usr/include/x86_64-linux-gnu/bits/confname.h:
 
@@ -587,6 +603,8 @@ CMakeFiles/test_log.dir/test/test_log.cpp.o: /home/pzx/GitHub/cpp-library/C++高
 /usr/include/c++/9/bits/predefined_ops.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/9/include/stdint.h:
+
+/usr/include/c++/9/atomic:
 
 /usr/include/c++/9/bits/move.h:
 

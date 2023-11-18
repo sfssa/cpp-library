@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-11-13 18:14:11
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-11-16 22:14:51
+ * @LastEditTime: 2023-11-19 00:12:23
  * @FilePath: /cpp-library/C++高性能服务器/atpdxy/config/config.h
  * @Description: 
  * 
@@ -21,6 +21,7 @@
 #include <unordered_set>
 #include <functional>
 #include <list>
+#include "../thread/thread.h"
 #include "../log/log.h"
 #include "../utils/utils.h"
 
@@ -299,22 +300,32 @@ public:
     // 当配置发生变化的回调函数
     typedef std::function<void (const T& old_value,const T& new_value)> on_change_cb;
     
+    typedef RWMutex RWMutexType;
+
     ConfigVar(const std::string& name,const T& default_value,const std::string& description="")
         :ConfigVarBase(name,description),m_val(default_value)
     {
 
     }
 
-    const T getValue() const {return m_val;}
+    const T getValue() 
+    {
+        RWMutexType::ReadLock lock(m_mutex);
+        return m_val;
+    }
 
     void setValue(const T& val) 
     {
-        if(val==m_val)
         {
-            return;
+            RWMutexType::ReadLock lock(m_mutex);
+            if(val==m_val)
+            {
+                return;
+            }
+            for(auto& i : m_cbs)
+                i.second(m_val,val);// 执行回调函数
         }
-        for(auto& i : m_cbs)
-            i.second(m_val,val);// 执行回调函数
+        RWMutexType::WriteLock lock(m_mutex);
         m_val=val;
     }
 
@@ -325,6 +336,7 @@ public:
         try{
             // return boost::lexical_cast<std::string>(m_val);
             // 创造一个ToStr()实例，然后通过operator()调用这个实例(仿函数)
+            RWMutexType::ReadLock lock(m_mutex);
             return ToStr()(m_val);
         }catch(std::exception& e){
             ATPDXY_LOG_ERROR(ATPDXY_LOG_ROOT())<<"ConfigVar::toString exception"
@@ -336,7 +348,6 @@ public:
     bool fromString(const std::string& val) override
     {
         try{
-            // m_val=boost::lexical_cast<T>(val);
             setValue(FromStr()(val));
         }catch(std::exception& e){
             ATPDXY_LOG_ERROR(ATPDXY_LOG_ROOT())<<"ConfigVar::toString exception"
@@ -345,13 +356,10 @@ public:
         return false;
     }
 
-    // void addListener(uint64_t key,on_change_cb cb)
-    // {
-    //     m_cbs[key]=cb;
-    // }
     uint64_t addListener(on_change_cb cb)
     {
         static uint64_t s_fun_id=0;
+        RWMutexType::WriteLock lock(m_mutex);
         ++s_fun_id;
         m_cbs[s_fun_id]=cb;
         return s_fun_id;
@@ -359,28 +367,33 @@ public:
 
     void delListener(uint64_t key)
     {
+        RWMutexType::WriteLock lock(m_mutex);
         m_cbs.erase(key);
     }
 
     on_change_cb getListener(uint64_t key)
     {
+        RWMutexType::ReadLock lock(m_mutex);
         auto it=m_cbs.find(key);
         return it==m_cbs.end()?nullptr:it->second;
     }
 
     void clearListener()
     {
+        RWMutexType::WriteLock lock(m_mutex);
         m_cbs.clear();
     }
 private:
     T m_val;
     // 变更回调函数组，函数指针没有比较函数，因此采用map来解决，通过key找到函数指针来删除
     std::map<uint64_t,on_change_cb> m_cbs;
+    RWMutexType m_mutex;
 };
 
 class Config
 {
 public: 
+    typedef RWMutex RWMutexType;
     // 配置项的名称和配置项的智能指针
     typedef std::map<std::string,ConfigVarBase::ptr> ConfigVarMap;
 
@@ -394,7 +407,7 @@ public:
     static typename ConfigVar<T>::ptr lookUp(const std::string& name,const T& default_value,
         const std::string& description="")
     {
-        // auto tmp=lookUp<T>(name);
+        RWMutexType::WriteLock lock(GetMutex());
         auto it=getDatas().find(name);
         if(it!=getDatas().end())
         {
@@ -433,6 +446,7 @@ public:
     template <class T>
     static typename ConfigVar<T>::ptr lookUp(const std::string& name)
     {
+        RWMutexType::ReadLock lock(GetMutex());
         auto it=getDatas().find(name);
         if(it==getDatas().end())
             return nullptr;
@@ -441,11 +455,19 @@ public:
 
     static void loadFromYaml(const YAML::Node& root);
     static ConfigVarBase::ptr lookupBase(const std::string& name);
+    static void Visit(std::function<void( ConfigVarBase::ptr)> cb);
 private:
     static ConfigVarMap& getDatas()
     {
         static ConfigVarMap s_datas;
         return s_datas;
+    }
+
+    // 不直接用static变量是为了保证初始化的顺序
+    static RWMutexType& GetMutex()
+    {
+        static RWMutexType s_mutex;
+        return s_mutex;
     }
 };
 

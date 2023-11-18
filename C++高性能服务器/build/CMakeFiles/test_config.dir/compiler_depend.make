@@ -234,6 +234,18 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
   /usr/include/x86_64-linux-gnu/bits/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
   /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/design/singleton.h \
+  /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/thread/thread.h \
+  /usr/include/c++/9/thread \
+  /usr/include/c++/9/chrono \
+  /usr/include/c++/9/ratio \
+  /usr/include/c++/9/limits \
+  /usr/include/c++/9/ctime \
+  /usr/include/c++/9/bits/parse_numbers.h \
+  /usr/include/c++/9/functional \
+  /usr/include/c++/9/bits/std_function.h \
+  /usr/include/semaphore.h \
+  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+  /usr/include/c++/9/atomic \
   /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/config/config.h \
   /usr/include/boost/lexical_cast.hpp \
   /usr/include/boost/config.hpp \
@@ -529,7 +541,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
   /usr/include/boost/concept/detail/concept_undef.hpp \
   /usr/include/boost/iterator/iterator_concepts.hpp \
   /usr/include/boost/limits.hpp \
-  /usr/include/c++/9/limits \
   /usr/include/c++/9/algorithm \
   /usr/include/c++/9/bits/stl_algo.h \
   /usr/include/c++/9/bits/algorithmfwd.h \
@@ -639,8 +650,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
   /usr/include/boost/mpl/less.hpp \
   /usr/include/boost/mpl/aux_/preprocessed/gcc/less.hpp \
   /usr/include/boost/numeric/conversion/converter_policies.hpp \
-  /usr/include/c++/9/functional \
-  /usr/include/c++/9/bits/std_function.h \
   /usr/include/boost/config/no_tr1/cmath.hpp \
   /usr/include/c++/9/cmath \
   /usr/include/math.h \
@@ -677,7 +686,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
   /usr/include/boost/core/snprintf.hpp \
   /usr/include/c++/9/locale \
   /usr/include/c++/9/bits/locale_facets_nonio.h \
-  /usr/include/c++/9/ctime \
   /usr/include/x86_64-linux-gnu/c++/9/bits/time_members.h \
   /usr/include/x86_64-linux-gnu/c++/9/bits/messages_members.h \
   /usr/include/libintl.h \
@@ -720,7 +728,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
   /usr/local/include/yaml-cpp/node/detail/node_iterator.h \
   /usr/local/include/yaml-cpp/node/iterator.h \
   /usr/local/include/yaml-cpp/node/detail/iterator.h \
-  /usr/include/c++/9/atomic \
   /usr/local/include/yaml-cpp/node/convert.h \
   /usr/include/c++/9/unordered_map \
   /usr/include/c++/9/bits/hashtable.h \
@@ -803,8 +810,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/x86_64-linux-gnu/c++/9/bits/time_members.h:
 
-/usr/include/c++/9/ctime:
-
 /usr/include/c++/9/bits/locale_facets_nonio.h:
 
 /usr/include/c++/9/locale:
@@ -846,8 +851,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 /usr/include/boost/container/container_fwd.hpp:
 
 /usr/include/c++/9/cmath:
-
-/usr/include/c++/9/functional:
 
 /usr/include/boost/numeric/conversion/converter_policies.hpp:
 
@@ -983,17 +986,17 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
 
-/usr/include/boost/preprocessor/arithmetic/sub.hpp:
+/usr/lib/gcc/x86_64-linux-gnu/9/include/limits.h:
 
-/usr/include/boost/range/iterator_range_core.hpp:
+/usr/include/boost/type_traits/is_signed.hpp:
 
-/usr/include/x86_64-linux-gnu/c++/9/bits/basic_file.h:
+/usr/include/boost/type_traits/make_unsigned.hpp:
 
-/usr/include/boost/config/helper_macros.hpp:
+/usr/include/boost/range/value_type.hpp:
 
-/usr/include/boost/config/detail/suffix.hpp:
+/usr/include/c++/9/bits/uniform_int_dist.h:
 
-/usr/include/boost/type_traits/is_integral.hpp:
+/usr/include/c++/9/bits/algorithmfwd.h:
 
 /usr/include/c++/9/version:
 
@@ -1002,10 +1005,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 /usr/include/boost/mpl/aux_/preprocessor/params.hpp:
 
 /usr/include/boost/type_traits/is_function.hpp:
-
-/usr/include/assert.h:
-
-/usr/include/boost/mpl/placeholders.hpp:
 
 /usr/local/include/yaml-cpp/node/node.h:
 
@@ -1025,6 +1024,32 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/boost/lexical_cast.hpp:
 
+/usr/include/boost/array.hpp:
+
+/usr/include/boost/core/enable_if.hpp:
+
+/usr/include/semaphore.h:
+
+/usr/include/boost/range/end.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/wordsize.h:
+
+/usr/include/c++/9/functional:
+
+/usr/include/c++/9/chrono:
+
+/usr/include/c++/9/algorithm:
+
+/usr/include/c++/9/bits/parse_numbers.h:
+
+/usr/include/boost/config/stdlib/libstdcpp3.hpp:
+
+/usr/include/boost/throw_exception.hpp:
+
+/usr/include/c++/9/iostream:
+
+/usr/include/boost/type_traits/is_void.hpp:
+
 /usr/include/boost/numeric/conversion/int_float_mixture_enum.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
@@ -1034,10 +1059,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 /usr/include/x86_64-linux-gnu/bits/confname.h:
 
 /usr/include/x86_64-linux-gnu/bits/posix_opt.h:
-
-/usr/include/boost/config/detail/cxx_composite.hpp:
-
-/usr/include/boost/mpl/aux_/preprocessor/default_params.hpp:
 
 /usr/include/x86_64-linux-gnu/asm/unistd_64.h:
 
@@ -1127,6 +1148,8 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/x86_64-linux-gnu/c++/9/bits/error_constants.h:
 
+/usr/include/c++/9/thread:
+
 /usr/include/c++/9/system_error:
 
 /usr/include/c++/9/bits/locale_classes.tcc:
@@ -1175,11 +1198,17 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/boost/range/concepts.hpp:
 
+/usr/include/boost/range/detail/misc_concept.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
+
 /usr/include/boost/preprocessor/detail/limits/auto_rec_256.hpp:
 
-/usr/include/boost/config/workaround.hpp:
+/usr/include/c++/9/ratio:
 
-/usr/include/boost/mpl/aux_/config/gpu.hpp:
+/usr/include/boost/numeric/conversion/detail/int_float_mixture.hpp:
+
+/usr/include/boost/range/range_fwd.hpp:
 
 /usr/include/boost/iterator/reverse_iterator.hpp:
 
@@ -1192,6 +1221,10 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 /usr/include/boost/config/user.hpp:
 
 /usr/include/c++/9/bits/localefwd.h:
+
+/usr/include/boost/preprocessor/detail/is_binary.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/select.h:
 
 /usr/include/x86_64-linux-gnu/bits/time.h:
 
@@ -1237,8 +1270,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/c++/9/bits/streambuf.tcc:
 
-/usr/include/c++/9/iterator:
-
 /usr/include/boost/config/platform/linux.hpp:
 
 /usr/include/boost/type_traits/is_class.hpp:
@@ -1263,15 +1294,11 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
+/usr/include/boost/concept/usage.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
+
 /usr/include/c++/9/bits/exception_ptr.h:
-
-/usr/include/boost/config/stdlib/libstdcpp3.hpp:
-
-/usr/include/boost/throw_exception.hpp:
-
-/usr/include/c++/9/iostream:
-
-/usr/include/boost/type_traits/is_void.hpp:
 
 /usr/include/c++/9/exception:
 
@@ -1280,6 +1307,10 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 /usr/include/c++/9/bits/exception.h:
 
 /usr/include/boost/mpl/aux_/config/bcc.hpp:
+
+/usr/include/c++/9/climits:
+
+/usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/wchar2.h:
 
@@ -1290,12 +1321,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
 
 /usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp:
-
-/usr/include/boost/assert.hpp:
-
-/usr/include/x86_64-linux-gnu/c++/9/bits/c++io.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
 
 /usr/include/boost/mpl/aux_/config/ctps.hpp:
 
@@ -1361,8 +1386,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/x86_64-linux-gnu/sys/types.h:
 
-/usr/include/boost/detail/workaround.hpp:
-
 /usr/include/boost/preprocessor/seq/limits/fold_left_256.hpp:
 
 /usr/include/c++/9/ostream:
@@ -1372,8 +1395,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 /usr/include/boost/mpl/aux_/config/preprocessor.hpp:
 
 /usr/include/boost/type_traits/is_array.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/wordsize.h:
 
 /usr/include/boost/preprocessor/repetition/enum_trailing_params.hpp:
 
@@ -1385,12 +1406,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/boost/type_traits/is_pointer.hpp:
 
-/usr/include/c++/9/atomic:
-
-/usr/include/wchar.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
-
 /usr/include/boost/mpl/arg_fwd.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
@@ -1398,6 +1413,8 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 /usr/include/boost/preprocessor/seq/for_each_i.hpp:
 
 /usr/include/boost/mpl/aux_/nested_type_wknd.hpp:
+
+/usr/include/c++/9/ctime:
 
 /usr/include/c++/9/bits/ptr_traits.h:
 
@@ -1469,8 +1486,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/c++/9/bits/list.tcc:
 
-/usr/include/c++/9/bits/algorithmfwd.h:
-
 /usr/include/boost/mpl/apply_fwd.hpp:
 
 /usr/include/x86_64-linux-gnu/c++/9/bits/atomic_word.h:
@@ -1487,14 +1502,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/boost/type_traits/conditional.hpp:
 
-/usr/include/boost/iterator/detail/config_undef.hpp:
-
-/usr/include/c++/9/bits/invoke.h:
-
-/usr/include/x86_64-linux-gnu/bits/select.h:
-
-/usr/include/boost/preprocessor/detail/is_binary.hpp:
-
 /usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h:
 
 /usr/include/c++/9/bits/indirect_array.h:
@@ -1510,6 +1517,12 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 /usr/include/c++/9/bits/functexcept.h:
 
 /usr/include/c++/9/bits/stl_iterator.h:
+
+/usr/include/c++/9/bits/stl_algo.h:
+
+/usr/include/c++/9/bits/shared_ptr_base.h:
+
+/usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp:
 
 /usr/include/math.h:
 
@@ -1545,6 +1558,12 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/lib/gcc/x86_64-linux-gnu/9/include/stdint.h:
 
+/usr/include/wchar.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
+
+/usr/include/c++/9/atomic:
+
 /usr/include/x86_64-linux-gnu/gnu/stubs.h:
 
 /usr/include/linux/limits.h:
@@ -1577,7 +1596,13 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/boost/type_traits/add_reference.hpp:
 
-/usr/include/boost/iterator/iterator_traits.hpp:
+/usr/include/boost/range/mutable_iterator.hpp:
+
+/usr/include/c++/9/limits:
+
+/usr/include/c++/9/bits/basic_ios.tcc:
+
+/usr/include/c++/9/bits/cxxabi_forced.h:
 
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
@@ -1615,7 +1640,9 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/c++/9/ext/atomicity.h:
 
-/usr/include/boost/type_traits/is_signed.hpp:
+/usr/include/x86_64-linux-gnu/c++/9/bits/basic_file.h:
+
+/usr/include/boost/range/iterator_range_core.hpp:
 
 /usr/include/c++/9/bits/hash_bytes.h:
 
@@ -1624,6 +1651,10 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 /usr/include/x86_64-linux-gnu/bits/setjmp.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
+
+/usr/include/boost/config/detail/cxx_composite.hpp:
+
+/usr/include/boost/mpl/aux_/preprocessor/default_params.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/floatn.h:
 
@@ -1646,6 +1677,8 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 /usr/include/boost/type_traits/has_right_shift.hpp:
 
 /usr/include/boost/type_traits/is_member_pointer.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/semaphore.h:
 
 /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 
@@ -1703,23 +1736,45 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/errno.h:
 
-/usr/include/c++/9/bits/basic_ios.tcc:
-
-/usr/include/c++/9/bits/cxxabi_forced.h:
-
-/usr/include/boost/range/mutable_iterator.hpp:
-
-/usr/include/c++/9/limits:
-
 /usr/include/boost/mpl/aux_/config/msvc.hpp:
-
-/usr/include/boost/range/value_type.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
 /usr/include/c++/9/bits/stl_tree.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
+
+/usr/include/boost/config/detail/suffix.hpp:
+
+/usr/include/boost/type_traits/is_integral.hpp:
+
+/usr/include/boost/config/helper_macros.hpp:
+
+/usr/include/boost/detail/workaround.hpp:
+
+/usr/include/boost/config/workaround.hpp:
+
+/usr/include/boost/mpl/aux_/config/gpu.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/9/bits/c++io.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
+
+/usr/include/boost/assert.hpp:
+
+/usr/include/boost/preprocessor/arithmetic/sub.hpp:
+
+/usr/include/assert.h:
+
+/usr/include/c++/9/bits/invoke.h:
+
+/usr/include/boost/iterator/detail/config_undef.hpp:
+
+/usr/include/boost/mpl/placeholders.hpp:
+
+/usr/include/boost/iterator/iterator_traits.hpp:
+
+/usr/include/c++/9/iterator:
 
 /usr/include/c++/9/bits/stream_iterator.h:
 
@@ -1786,6 +1841,10 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 /usr/include/boost/preprocessor/config/config.hpp:
 
 /usr/include/boost/mpl/aux_/template_arity_fwd.hpp:
+
+/usr/include/boost/mpl/aux_/has_apply.hpp:
+
+/usr/include/boost/preprocessor/arithmetic/detail/is_maximum_number.hpp:
 
 /usr/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp:
 
@@ -1933,6 +1992,8 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/boost/preprocessor/facilities/check_empty.hpp:
 
+/home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/thread/thread.h:
+
 /usr/include/boost/preprocessor/variadic/has_opt.hpp:
 
 /usr/include/c++/9/cstddef:
@@ -1994,8 +2055,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 /usr/include/boost/concept/detail/concept_undef.hpp:
 
 /usr/include/boost/mpl/arg.hpp:
-
-/usr/lib/gcc/x86_64-linux-gnu/9/include/limits.h:
 
 /usr/include/boost/mpl/aux_/config/pp_counter.hpp:
 
@@ -2067,10 +2126,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp:
 
-/usr/include/boost/preprocessor/arithmetic/detail/is_maximum_number.hpp:
-
-/usr/include/boost/mpl/aux_/has_apply.hpp:
-
 /usr/include/boost/preprocessor/list/adt.hpp:
 
 /usr/include/boost/mpl/aux_/type_wrapper.hpp:
@@ -2129,14 +2184,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/boost/type_traits/is_base_and_derived.hpp:
 
-/usr/include/boost/numeric/conversion/detail/int_float_mixture.hpp:
-
-/usr/include/boost/range/range_fwd.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
-
-/usr/include/boost/concept/usage.hpp:
-
 /usr/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp:
 
 /usr/include/boost/range/detail/extract_optional_type.hpp:
@@ -2147,19 +2194,11 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 
 /usr/include/boost/range/const_iterator.hpp:
 
-/usr/include/boost/range/end.hpp:
-
 /usr/include/string.h:
 
 /usr/include/x86_64-linux-gnu/bits/string_fortified.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
-
-/usr/include/boost/range/detail/misc_concept.hpp:
-
 /usr/include/boost/range/has_range_iterator.hpp:
-
-/usr/include/boost/type_traits/make_unsigned.hpp:
 
 /usr/include/c++/9/bits/valarray_before.h:
 
@@ -2168,10 +2207,6 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 /usr/include/boost/type_traits/add_const.hpp:
 
 /usr/include/boost/utility/enable_if.hpp:
-
-/usr/include/boost/array.hpp:
-
-/usr/include/boost/core/enable_if.hpp:
 
 /usr/include/boost/concept/detail/general.hpp:
 
@@ -2208,17 +2243,3 @@ CMakeFiles/test_config.dir/test/test_config.cpp.o: /home/pzx/GitHub/cpp-library/
 /usr/include/boost/range/detail/common.hpp:
 
 /usr/include/boost/limits.hpp:
-
-/usr/include/c++/9/algorithm:
-
-/usr/include/c++/9/bits/shared_ptr_base.h:
-
-/usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp:
-
-/usr/include/c++/9/bits/stl_algo.h:
-
-/usr/include/c++/9/bits/uniform_int_dist.h:
-
-/usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp:
-
-/usr/include/c++/9/climits:

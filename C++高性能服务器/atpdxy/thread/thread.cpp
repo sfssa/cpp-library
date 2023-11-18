@@ -2,13 +2,15 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-11-13 18:14:11
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-11-18 10:53:52
+ * @LastEditTime: 2023-11-18 23:17:06
  * @FilePath: /cpp-library/C++高性能服务器/atpdxy/thread/thread.cpp
  * @Description: 
  * 
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved. 
  */
 #include "./thread.h"
+#include "../log/log.h"
+#include "../utils/utils.h"
 
 namespace atpdxy
 {
@@ -20,6 +22,32 @@ static thread_local Thread* t_thread=nullptr;            // 线程
 static thread_local std::string t_thread_name="UNKNOW";  // 线程名称
 
 static atpdxy::Logger::ptr g_logger =ATPDXY_LOG_NAME("system");
+
+Semaphore::Semaphore(uint32_t count)
+{
+    if(sem_init(&m_semaphore,0,count))
+    {
+        throw std::logic_error("sem_init error");
+    }
+}
+
+Semaphore::~Semaphore()
+{
+    sem_destroy(&m_semaphore);
+}
+
+void Semaphore::wait()
+{
+    // 避免被打断
+    if(sem_wait(&m_semaphore))
+        throw std::logic_error("sem_wait error");
+}
+
+void Semaphore::notify()
+{
+    if(sem_post(&m_semaphore))
+        throw std::logic_error("sem_post error");
+}
 
 Thread* Thread::GetThis()
 {
@@ -51,7 +79,9 @@ Thread::Thread(std::function<void()> cb,const std::string& name)
             <<" name="<<name;
         throw std::logic_error("pthread_create error");
     }
+    m_semaphore.wait();
 }
+
 Thread::~Thread()
 {
     // 分离线程，执行完毕后自动回收资源
@@ -85,6 +115,7 @@ void* Thread::run(void* arg)
     std::function<void()> cb;
     // 交换cb和thread->m_cb的内容，在当前线程执行回调函数前，将回调函数从线程对象中取出来，避免回调执行期间被修改
     cb.swap(thread->m_cb);
+    thread->m_semaphore.notify();
     cb();
     return 0;
 }

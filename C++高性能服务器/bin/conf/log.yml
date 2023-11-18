@@ -1,13 +1,29 @@
+# logs:
+#     - name: root
+#       level: info
+#       appenders:
+#           - type: FileLogAppender
+#             file: /home/pzx/GitHub/cpp-library/C++高性能服务器/logs/root.txt
+#           - type: StdoutLogAppender
+#     - name: system
+#       level: info
+#       appenders:
+#           - type: FileLogAppender
+#             file: /home/pzx/GitHub/cpp-library/C++高性能服务器/logs/system.txt
+#           - type: StdoutLogAppender
 logs:
     - name: root
       level: info
+      formatter: '%d%T%m%n'
       appenders:
           - type: FileLogAppender
-            file: /home/pzx/GitHub/cpp-library/C++高性能服务器/logs/root.txt
+            file: root.txt
           - type: StdoutLogAppender
     - name: system
-      level: info
+      level: debug
+      formatter: '%d%T%m%n'
       appenders:
           - type: FileLogAppender
-            file: /home/pzx/GitHub/cpp-library/C++高性能服务器/logs/system.txt
+            file: system.txt
+            formatter: '%d%T%c%T[%p]%T%m%n'
           - type: StdoutLogAppender

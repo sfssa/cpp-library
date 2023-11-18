@@ -13,7 +13,7 @@
 #include <map>
 #include "../utils/utils.h"
 #include "../design/singleton.h"
-// #include "../thread/thread.h"
+#include "../thread/thread.h"
 
 // 使用流式方式将日志级别为level的日志写入到logger
 #define ATPDXY_LOG_LEVEL(logger,level) \
@@ -62,6 +62,8 @@
 
 // 获取名为name的日志器
 #define ATPDXY_LOG_NAME(name) atpdxy::LoggerMgr::getInstance()->getLogger(name)
+
+class Mutex;
 
 namespace atpdxy
 {
@@ -272,7 +274,7 @@ class LogAppender
 friend class Logger;
 public:
     typedef std::shared_ptr<LogAppender> ptr;
-    // typedef Spinlock MutexType;
+    typedef Spinlock MutexType;
 
     virtual ~LogAppender(){}
 
@@ -302,7 +304,7 @@ public:
 protected:
     LogLevel::Level m_level_=LogLevel::DEBUG;    // 日志级别
     bool m_hasFormatter_=false;                  // 是否有自己的日志格式器
-    // MutexType m_mutex_;                          // 互斥锁
+    MutexType m_mutex;                           // 互斥锁
     LogFormatter::ptr m_formatter_;              // 日志格式器
 };
 
@@ -312,7 +314,7 @@ class Logger:public std::enable_shared_from_this<Logger>
 friend class LoggerManager;
 public:
     typedef std::shared_ptr<Logger> ptr;
-    // typedef Spinlock MutexType;
+    typedef Spinlock MutexType;
 
     // 接收一个字符串作为日志器名称
     Logger(const std::string& name="root");
@@ -376,7 +378,7 @@ public:
 private:
     std::string m_name_;                        // 日志器名称
     LogLevel::Level m_level_;                   // 日志级别
-    // MutexType m_mutex_;                         // 互斥锁
+    MutexType m_mutex;                          // 互斥锁
     std::list<LogAppender::ptr> m_appenders_;   // 日志目标集合
     LogFormatter::ptr m_formatter_;             // 日志格式器
     Logger::ptr m_root_;                        // 主日志器
@@ -411,7 +413,7 @@ private:
 class LoggerManager
 {
 public:
-    // typedef Spinlock MutexType;
+    typedef Spinlock MutexType;
     LoggerManager();
 
     Logger::ptr getLogger(const std::string& name);
@@ -427,7 +429,7 @@ public:
     // 将日志器配置转换成YAML String
     std::string toYamlString();
 private:
-    // MutexType m_mutex_;                             // 互斥锁
+    MutexType m_mutex;                              // 互斥锁
     std::map<std::string,Logger::ptr> m_loggers_;   // 日志器容器
     Logger::ptr m_root_;                            // 主日志器
 };

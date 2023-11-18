@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-11-13 18:14:11
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-11-16 22:11:21
+ * @LastEditTime: 2023-11-19 00:04:35
  * @FilePath: /cpp-library/C++高性能服务器/atpdxy/config/config.cpp
  * @Description:    
  * 
@@ -67,7 +67,16 @@ void Config::loadFromYaml(const YAML::Node& root)
 // 查找当前命名的项
 ConfigVarBase::ptr Config::lookupBase(const std::string& name)
 {
+    RWMutexType::ReadLock lock(GetMutex());
     auto it =getDatas().find(name);
     return it==getDatas().end()?nullptr:it->second;
+}
+
+void Config::Visit(std::function<void( ConfigVarBase::ptr)> cb)
+{
+    RWMutexType::ReadLock lock(GetMutex());
+    ConfigVarMap& m=getDatas();
+    for(auto it=m.begin();it!=m.end();++it)
+        cb(it->second);
 }
 }
