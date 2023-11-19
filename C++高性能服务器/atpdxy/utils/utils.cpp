@@ -11,6 +11,7 @@
 #include "utils.h"
 #include "../log/log.h"
 #include <execinfo.h>
+#include "../fiber/fiber.h"
 
 namespace atpdxy
 {
@@ -24,7 +25,7 @@ pid_t getThreadId()
 
 uint32_t getFiberId()
 {
-    return 0;
+    return atpdxy::Fiber::GetFiberId();
 }
 
 void BackTrace(std::vector<std::string>& bt,int size,int skip)

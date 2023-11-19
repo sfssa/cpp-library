@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "/home/pzx/GitHub/cpp-library/C++高性能服务器/lib/libatpdxy.so"
   "CMakeFiles/atpdxy.dir/atpdxy/config/config.cpp.o"
   "CMakeFiles/atpdxy.dir/atpdxy/config/config.cpp.o.d"
+  "CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.o"
+  "CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.o.d"
   "CMakeFiles/atpdxy.dir/atpdxy/log/log.cpp.o"
   "CMakeFiles/atpdxy.dir/atpdxy/log/log.cpp.o.d"
   "CMakeFiles/atpdxy.dir/atpdxy/thread/thread.cpp.o"

@@ -114,10 +114,24 @@ CMakeFiles/atpdxy.dir/atpdxy/config/config.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/atpdxy.dir/atpdxy/config/config.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) -D__FILE__=\"atpdxy/config/config.cpp\" $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/config/config.cpp -o CMakeFiles/atpdxy.dir/atpdxy/config/config.cpp.s
 
+CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.o: CMakeFiles/atpdxy.dir/flags.make
+CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.o: /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/fiber/fiber.cpp
+CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.o: CMakeFiles/atpdxy.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pzx/GitHub/cpp-library/C++高性能服务器/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) -D__FILE__=\"atpdxy/fiber/fiber.cpp\" $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.o -MF CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.o.d -o CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.o -c /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/fiber/fiber.cpp
+
+CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) -D__FILE__=\"atpdxy/fiber/fiber.cpp\" $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/fiber/fiber.cpp > CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.i
+
+CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) -D__FILE__=\"atpdxy/fiber/fiber.cpp\" $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/fiber/fiber.cpp -o CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.s
+
 CMakeFiles/atpdxy.dir/atpdxy/thread/thread.cpp.o: CMakeFiles/atpdxy.dir/flags.make
 CMakeFiles/atpdxy.dir/atpdxy/thread/thread.cpp.o: /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/thread/thread.cpp
 CMakeFiles/atpdxy.dir/atpdxy/thread/thread.cpp.o: CMakeFiles/atpdxy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pzx/GitHub/cpp-library/C++高性能服务器/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/atpdxy.dir/atpdxy/thread/thread.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pzx/GitHub/cpp-library/C++高性能服务器/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/atpdxy.dir/atpdxy/thread/thread.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) -D__FILE__=\"atpdxy/thread/thread.cpp\" $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/atpdxy.dir/atpdxy/thread/thread.cpp.o -MF CMakeFiles/atpdxy.dir/atpdxy/thread/thread.cpp.o.d -o CMakeFiles/atpdxy.dir/atpdxy/thread/thread.cpp.o -c /home/pzx/GitHub/cpp-library/C++高性能服务器/atpdxy/thread/thread.cpp
 
 CMakeFiles/atpdxy.dir/atpdxy/thread/thread.cpp.i: cmake_force
@@ -133,6 +147,7 @@ atpdxy_OBJECTS = \
 "CMakeFiles/atpdxy.dir/atpdxy/log/log.cpp.o" \
 "CMakeFiles/atpdxy.dir/atpdxy/utils/utils.cpp.o" \
 "CMakeFiles/atpdxy.dir/atpdxy/config/config.cpp.o" \
+"CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.o" \
 "CMakeFiles/atpdxy.dir/atpdxy/thread/thread.cpp.o"
 
 # External object files for target atpdxy
@@ -141,10 +156,11 @@ atpdxy_EXTERNAL_OBJECTS =
 /home/pzx/GitHub/cpp-library/C++高性能服务器/lib/libatpdxy.so: CMakeFiles/atpdxy.dir/atpdxy/log/log.cpp.o
 /home/pzx/GitHub/cpp-library/C++高性能服务器/lib/libatpdxy.so: CMakeFiles/atpdxy.dir/atpdxy/utils/utils.cpp.o
 /home/pzx/GitHub/cpp-library/C++高性能服务器/lib/libatpdxy.so: CMakeFiles/atpdxy.dir/atpdxy/config/config.cpp.o
+/home/pzx/GitHub/cpp-library/C++高性能服务器/lib/libatpdxy.so: CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.o
 /home/pzx/GitHub/cpp-library/C++高性能服务器/lib/libatpdxy.so: CMakeFiles/atpdxy.dir/atpdxy/thread/thread.cpp.o
 /home/pzx/GitHub/cpp-library/C++高性能服务器/lib/libatpdxy.so: CMakeFiles/atpdxy.dir/build.make
 /home/pzx/GitHub/cpp-library/C++高性能服务器/lib/libatpdxy.so: CMakeFiles/atpdxy.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pzx/GitHub/cpp-library/C++高性能服务器/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX shared library /home/pzx/GitHub/cpp-library/C++高性能服务器/lib/libatpdxy.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pzx/GitHub/cpp-library/C++高性能服务器/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX shared library /home/pzx/GitHub/cpp-library/C++高性能服务器/lib/libatpdxy.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/atpdxy.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

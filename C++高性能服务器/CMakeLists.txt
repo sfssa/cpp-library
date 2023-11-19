@@ -17,6 +17,7 @@ set(LIB_SRC
     atpdxy/log/log.cpp
     atpdxy/utils/utils.cpp
     atpdxy/config/config.cpp
+    atpdxy/fiber/fiber.cpp
     atpdxy/thread/thread.cpp
 )
 
@@ -52,6 +53,11 @@ add_executable(test_utils test/test_utils.cpp)
 add_dependencies(test_utils atpdxy)
 force_redefine_file_macro_for_sources(test_utils)
 target_link_libraries(test_utils ${LIBS})
+
+add_executable(test_fiber test/test_fiber.cpp)
+add_dependencies(test_fiber atpdxy)
+force_redefine_file_macro_for_sources(test_fiber)
+target_link_libraries(test_fiber ${LIBS})
 
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)

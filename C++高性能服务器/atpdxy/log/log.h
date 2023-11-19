@@ -19,7 +19,7 @@
 #define ATPDXY_LOG_LEVEL(logger,level) \
     if(logger->getLevel()<=level) \
         atpdxy::LogEventWrap(atpdxy::LogEvent::ptr(new atpdxy::LogEvent(logger,level, \
-            __FILE__,__LINE__,0,atpdxy::getThreadId(),atpdxy::getFiberId(),time(0)))).getSS()
+            __FILE__,__LINE__,0,atpdxy::getThreadId(),atpdxy::getFiberId(),time(0),atpdxy::Thread::GetName()))).getSS()
 
 // 使用流方式将日志级别debug的日志写入logger
 #define ATPDXY_LOG_DEBUG(logger) ATPDXY_LOG_LEVEL(logger,atpdxy::LogLevel::DEBUG)
@@ -40,7 +40,7 @@
 #define ATPDXY_LOG_FMT_LEVEL(logger,level,fmt,...) \
     if(logger->getLevel()<=level) \
         atpdxy::LogEventWrap(atpdxy::LogEvent::ptr(new atpdxy::LogEvent(logger,level, \
-            __FILE__,__LINE__,0,atpdxy::getThreadId(),atpdxy::getFiberId(),time(0)))).getEvent()->format(fmt,__VA_ARGS__)
+            __FILE__,__LINE__,0,atpdxy::getThreadId(),atpdxy::getFiberId(),time(0),atpdxy::Thread::GetName()))).getEvent()->format(fmt,__VA_ARGS__)
 
 // 使用格式化方式将日志级别为debug的日志写入logger
 #define ATPDXY_LOG_FMT_DEBUG(logger,fmt,...) ATPDXY_LOG_FMT_LEVEL(logger,atpdxy::LogLevel::DEBUG,fmt,__VA_ARGS__)

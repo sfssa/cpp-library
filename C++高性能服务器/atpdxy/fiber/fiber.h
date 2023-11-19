@@ -29,7 +29,8 @@ public:
         HOLD, // 阻塞状态
         EXEC, // 执行状态
         TERM, // 执行完毕状态
-        READY // 就绪状态
+        READY,// 就绪状态
+        EXCEPT// 出错状态
     };
 private:
     Fiber();
@@ -64,6 +65,9 @@ public:
 
     static void MainFunc();
 
+    static uint64_t GetFiberId();
+
+    uint64_t getId() const {return m_id;}
 private:
     uint64_t m_id=0;            // 协程ID
     uint32_t m_stacksize=0;     // 协程栈大小
