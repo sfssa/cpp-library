@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-11-13 18:14:11
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-11-19 12:23:16
+ * @LastEditTime: 2023-11-19 16:53:51
  * @FilePath: /cpp-library/C++高性能服务器/atpdxy/fiber/fiber.h
  * @Description: 
  * 
@@ -63,10 +63,13 @@ public:
     // 获得总协程数
     static uint64_t TotalFibers();
 
+    // 协程的主要执行函数
     static void MainFunc();
 
+    // 获取协程ID
     static uint64_t GetFiberId();
 
+    // 获取当前协程的id
     uint64_t getId() const {return m_id;}
 private:
     uint64_t m_id=0;            // 协程ID
