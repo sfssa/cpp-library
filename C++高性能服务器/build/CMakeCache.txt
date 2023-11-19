@@ -216,9 +216,6 @@ CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 PTHREAD:FILEPATH=/usr/lib/x86_64-linux-gnu/libpthread.so
 
 //Path to a library.
-YAMKCPP:FILEPATH=/usr/local/lib/libyaml-cpp.a
-
-//Path to a library.
 YAMLCPP:FILEPATH=/usr/local/lib/libyaml-cpp.a
 
 //Value Computed by CMake

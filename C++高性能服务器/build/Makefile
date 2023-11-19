@@ -171,6 +171,19 @@ test_thread/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_thread.dir/build.make CMakeFiles/test_thread.dir/build
 .PHONY : test_thread/fast
 
+#=============================================================================
+# Target rules for targets named test_utils
+
+# Build rule for target.
+test_utils: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_utils
+.PHONY : test_utils
+
+# fast build rule for target.
+test_utils/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_utils.dir/build.make CMakeFiles/test_utils.dir/build
+.PHONY : test_utils/fast
+
 atpdxy/config/config.o: atpdxy/config/config.cpp.o
 .PHONY : atpdxy/config/config.o
 
@@ -339,6 +352,30 @@ test/test_thread.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_thread.dir/build.make CMakeFiles/test_thread.dir/test/test_thread.cpp.s
 .PHONY : test/test_thread.cpp.s
 
+test/test_utils.o: test/test_utils.cpp.o
+.PHONY : test/test_utils.o
+
+# target to build an object file
+test/test_utils.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_utils.dir/build.make CMakeFiles/test_utils.dir/test/test_utils.cpp.o
+.PHONY : test/test_utils.cpp.o
+
+test/test_utils.i: test/test_utils.cpp.i
+.PHONY : test/test_utils.i
+
+# target to preprocess a source file
+test/test_utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_utils.dir/build.make CMakeFiles/test_utils.dir/test/test_utils.cpp.i
+.PHONY : test/test_utils.cpp.i
+
+test/test_utils.s: test/test_utils.cpp.s
+.PHONY : test/test_utils.s
+
+# target to generate assembly for a file
+test/test_utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_utils.dir/build.make CMakeFiles/test_utils.dir/test/test_utils.cpp.s
+.PHONY : test/test_utils.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -351,6 +388,7 @@ help:
 	@echo "... test_config"
 	@echo "... test_log"
 	@echo "... test_thread"
+	@echo "... test_utils"
 	@echo "... atpdxy/config/config.o"
 	@echo "... atpdxy/config/config.i"
 	@echo "... atpdxy/config/config.s"
@@ -372,6 +410,9 @@ help:
 	@echo "... test/test_thread.o"
 	@echo "... test/test_thread.i"
 	@echo "... test/test_thread.s"
+	@echo "... test/test_utils.o"
+	@echo "... test/test_utils.i"
+	@echo "... test/test_utils.s"
 .PHONY : help
 
 

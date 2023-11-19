@@ -48,6 +48,11 @@ add_dependencies(test_thread atpdxy)
 force_redefine_file_macro_for_sources(test_thread)
 target_link_libraries(test_thread ${LIBS})
 
+add_executable(test_utils test/test_utils.cpp)
+add_dependencies(test_utils atpdxy)
+force_redefine_file_macro_for_sources(test_utils)
+target_link_libraries(test_utils ${LIBS})
+
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
