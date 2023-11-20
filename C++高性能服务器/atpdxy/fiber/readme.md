@@ -191,4 +191,5 @@ int main()
 在协程的设计中，`swapIn` 和 `swapOut` 的过程是通过操作上下文（context）实现的。`swapIn` 将当前协程的上下文保存起来，然后切换到另一个协程的上下文，从而实现协程的切入。而 `swapOut` 就是将当前协程的上下文保存起来，然后再切换回主协程或其他协程的上下文，实现协程的切出。
 
 当一个协程执行了 `swapOut` 后，它的上下文被保存起来，然后通过 `swapcontext` 函数切换到其他协程（可能是主协程，也可能是其他子协程）。这样，其他协程的上下文就开始执行，实现了协程的交替执行。
-
+# 测试代码流程图
+![logger1](https://github.com/sfssa/cpp-library/blob/master/C%2B%2B%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8/static/fiber.jpg)

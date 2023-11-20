@@ -3,6 +3,7 @@
 #include "../macro.h"
 #include "../config/config.h"
 #include "../log/log.h"
+#include "../scheduler/scheduler.h"
 
 namespace atpdxy
 {
@@ -58,7 +59,7 @@ Fiber::Fiber()
     ATPDXY_LOG_DEBUG(g_logger)<<"Fiber::Fiber";
 }
 
-Fiber::Fiber(std::function<void()> cb,size_t stacksize)
+Fiber::Fiber(std::function<void()> cb,size_t stacksize,bool use_caller)
     :m_id(++s_fiber_id),m_cb(cb)
 {
     // 协程总数+1
@@ -85,9 +86,14 @@ Fiber::Fiber(std::function<void()> cb,size_t stacksize)
     // 设置栈大小
     m_ctx.uc_stack.ss_size=m_stacksize;
 
-    // 设置协程执行函数
-    makecontext(&m_ctx,&Fiber::MainFunc,0);
-
+    if(!use_caller)
+    {
+        // 设置协程执行函数
+        makecontext(&m_ctx,&Fiber::MainFunc,0);
+    }
+    else
+        makecontext(&m_ctx,&Fiber::CallerMainFunc,0);
+    
     ATPDXY_LOG_DEBUG(g_logger)<<"Fiber::Fiber id= "<<m_id;
 }
 
@@ -123,7 +129,8 @@ Fiber::~Fiber()
         if(cur==this)
             SetThis(nullptr);
     }
-    ATPDXY_LOG_DEBUG(g_logger)<<"Fiber::~Fiber id= "<<m_id;
+    ATPDXY_LOG_DEBUG(g_logger)<<"Fiber::~Fiber id= "<<m_id
+        <<" total="<<s_fiber_count;
 }
 
 uint64_t Fiber::GetFiberId()
@@ -154,13 +161,28 @@ void Fiber::reset(std::function<void()> cb)
     m_state=INIT;
 }
 
+void Fiber::call()
+{
+    SetThis(this);
+    m_state=EXEC;
+    if(swapcontext(&t_threadFiber->m_ctx,&m_ctx));
+        ATPDXY_ASSERT2(false,"swapcontext");
+}
+
+void Fiber::back()
+{
+    SetThis(t_threadFiber.get());
+    if(swapcontext(&m_ctx,&t_threadFiber->m_ctx))
+        ATPDXY_ASSERT2(false,"swapcontext");
+}
+
 void Fiber::swapIn()
 {
     // 将this对象设置为正在执行协程
     SetThis(this);
 
-    // 设置协程状态为运行
     ATPDXY_ASSERT(m_state!=EXEC);
+    // 运行状态
     m_state=EXEC;
     // 交换上下文
     if(swapcontext(&t_threadFiber->m_ctx,&m_ctx))
@@ -213,6 +235,7 @@ void Fiber::YieldToReady()
 {
     // 正在执行协程转换为READY，然后将主协程设置为正在执行协程
     Fiber::ptr cur=GetThis();
+    ATPDXY_ASSERT(cur->m_state==EXEC);
     cur->m_state=READY;
     cur->swapOut();
 }
@@ -221,6 +244,7 @@ void Fiber::YieldToHold()
 {
     // 正在执行协程转换为HOLD，然后将主协程设置为正在执行协程
     Fiber::ptr cur=GetThis();
+    ATPDXY_ASSERT(cur->m_state==EXEC);
     cur->m_state=HOLD;
     cur->swapOut();
 }
@@ -245,12 +269,18 @@ void Fiber::MainFunc()
     catch(std::exception& ex)
     {
         cur->m_state=EXCEPT;
-        ATPDXY_LOG_ERROR(g_logger)<<"Fiber Except: "<<ex.what();
+        ATPDXY_LOG_ERROR(g_logger)<<"Fiber Except: "<<ex.what()
+            <<" fiber_id="<<cur->getId()
+            <<std::endl
+            <<atpdxy::BacktraceToString();
     }
     catch(...)
     {
         cur->m_state=EXCEPT;
-        ATPDXY_LOG_ERROR(g_logger)<<"Fiber Except: ";
+        ATPDXY_LOG_ERROR(g_logger)<<"Fiber Except: "
+            <<" fiber_id="<<cur->getId()
+            <<std::endl
+            <<atpdxy::BacktraceToString();
     }
 
     // 将当前协程对象的智能指针转换为裸指针
@@ -259,7 +289,40 @@ void Fiber::MainFunc()
     cur.reset();
     // 将正在执行的协程切换出去
     raw_ptr->swapOut();
-    ATPDXY_ASSERT2(false,"never reach");
+    ATPDXY_ASSERT2(false,"never reach fiber_id="+std::to_string(raw_ptr->getId()));
+}
+
+void Fiber::CallerMainFunc()
+{
+    Fiber::ptr cur=GetThis();
+    ATPDXY_ASSERT(cur);
+    try
+    {
+        cur->m_cb;
+        cur->m_cb=nullptr;
+        cur->m_state=TERM;
+    }
+    catch(std::exception& ex)
+    {
+        cur->m_state=EXCEPT;
+        ATPDXY_LOG_ERROR(g_logger)<<"Fiber Except: "<<ex.what()
+            <<" fiber_id="<<cur->getId()
+            <<std::endl
+            <<atpdxy::BacktraceToString();
+    }
+    catch(...)
+    {
+        cur->m_state=EXCEPT;
+        ATPDXY_LOG_ERROR(g_logger)<<"Fiber Except"
+            <<" fiber_id="<<cur->getId()
+            <<std::endl
+            <<atpdxy::BacktraceToString();
+    }
+
+    auto raw_ptr=cur.get();
+    cur.reset();
+    raw_ptr->back();
+    ATPDXY_ASSERT2(false,"never reach fiber_id="+std::to_string(raw_ptr->getId()));
 }
 
 }

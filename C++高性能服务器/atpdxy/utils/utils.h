@@ -17,6 +17,6 @@ pid_t getThreadId();
 // size:调用栈的大小
 // skip：从skip开始将调用栈信息添加到bt中
 void BackTrace(std::vector<std::string>& bt,int size,int skip=1);
-std::string BacktraceToString(int size,int skip=2,const std::string& prefix="");
+std::string BacktraceToString(int size=64,int skip=2,const std::string& prefix="");
 
 }
