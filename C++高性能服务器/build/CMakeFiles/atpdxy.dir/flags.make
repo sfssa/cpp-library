@@ -8,13 +8,17 @@ CXX_INCLUDES = -I/home/pzx/GitHub/cpp-library/C++高性能服务器/.
 
 CXX_FLAGS =  -rdynamic -O3 -g -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function -Wno-builtin-macro-redefined -fPIC
 
-# Custom defines: CMakeFiles/atpdxy.dir/atpdxy/log/log.cpp.o_DEFINES = __FILE__="atpdxy/log/log.cpp"
-
-# Custom defines: CMakeFiles/atpdxy.dir/atpdxy/utils/utils.cpp.o_DEFINES = __FILE__="atpdxy/utils/utils.cpp"
-
 # Custom defines: CMakeFiles/atpdxy.dir/atpdxy/config/config.cpp.o_DEFINES = __FILE__="atpdxy/config/config.cpp"
 
 # Custom defines: CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.o_DEFINES = __FILE__="atpdxy/fiber/fiber.cpp"
 
+# Custom defines: CMakeFiles/atpdxy.dir/atpdxy/log/log.cpp.o_DEFINES = __FILE__="atpdxy/log/log.cpp"
+
+# Custom defines: CMakeFiles/atpdxy.dir/atpdxy/mutex/mutex.cpp.o_DEFINES = __FILE__="atpdxy/mutex/mutex.cpp"
+
+# Custom defines: CMakeFiles/atpdxy.dir/atpdxy/scheduler/scheduler.cpp.o_DEFINES = __FILE__="atpdxy/scheduler/scheduler.cpp"
+
 # Custom defines: CMakeFiles/atpdxy.dir/atpdxy/thread/thread.cpp.o_DEFINES = __FILE__="atpdxy/thread/thread.cpp"
+
+# Custom defines: CMakeFiles/atpdxy.dir/atpdxy/utils/utils.cpp.o_DEFINES = __FILE__="atpdxy/utils/utils.cpp"
 

@@ -1,3 +1,5 @@
+#pragma once
+
 #include <thread>
 #include <functional>
 #include <memory>
@@ -8,6 +10,7 @@
 #include <list>
 
 #include "../fiber/fiber.h"
+
 namespace atpdxy
 {
 

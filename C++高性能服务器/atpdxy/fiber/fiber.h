@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-11-13 18:14:11
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-11-20 12:43:01
+ * @LastEditTime: 2023-11-21 10:45:12
  * @FilePath: /cpp-library/C++高性能服务器/atpdxy/fiber/fiber.h
  * @Description: 
  * 
@@ -13,7 +13,8 @@
 #include <memory>
 #include <functional>
 #include <ucontext.h>
-#include "../thread/thread.h"
+// #include "../mutex/mutex.h"
+// #include "../thread/thread.h"
 
 namespace atpdxy
 {
@@ -86,6 +87,8 @@ public:
 
     // 获得状态
     State getState() const {return m_state;}
+
+    void setState(const State state){m_state=state;}
 private:
     uint64_t m_id=0;            // 协程ID
     uint32_t m_stacksize=0;     // 协程栈大小

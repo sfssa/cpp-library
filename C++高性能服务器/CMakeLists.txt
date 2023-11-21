@@ -14,11 +14,13 @@ link_directories(/usr/local/lib)
 # message("***", ${YAMLCPP})
 
 set(LIB_SRC
-    atpdxy/log/log.cpp
-    atpdxy/utils/utils.cpp
     atpdxy/config/config.cpp
     atpdxy/fiber/fiber.cpp
+    atpdxy/log/log.cpp
+    atpdxy/mutex/mutex.cpp
+    atpdxy/scheduler/scheduler.cpp
     atpdxy/thread/thread.cpp
+    atpdxy/utils/utils.cpp
 )
 
 add_library(atpdxy SHARED ${LIB_SRC})
@@ -58,6 +60,11 @@ add_executable(test_fiber test/test_fiber.cpp)
 add_dependencies(test_fiber atpdxy)
 force_redefine_file_macro_for_sources(test_fiber)
 target_link_libraries(test_fiber ${LIBS})
+
+add_executable(test_scheduler test/test_scheduler.cpp)
+add_dependencies(test_scheduler atpdxy)
+force_redefine_file_macro_for_sources(test_scheduler)
+target_link_libraries(test_scheduler ${LIBS})
 
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
