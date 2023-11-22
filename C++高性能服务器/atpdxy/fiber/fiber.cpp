@@ -56,7 +56,7 @@ Fiber::Fiber()
 
     // 协程总数增加
     ++s_fiber_count;
-    ATPDXY_LOG_DEBUG(g_logger)<<"Fiber::Fiber";
+    ATPDXY_LOG_DEBUG(g_logger)<<"Fiber::Fiber main";
 }
 
 Fiber::Fiber(std::function<void()> cb,size_t stacksize,bool use_caller)
@@ -165,7 +165,7 @@ void Fiber::call()
 {
     SetThis(this);
     m_state=EXEC;
-    if(swapcontext(&t_threadFiber->m_ctx,&m_ctx));
+    if(swapcontext(&t_threadFiber->m_ctx,&m_ctx))
         ATPDXY_ASSERT2(false,"swapcontext");
 }
 
@@ -184,13 +184,14 @@ void Fiber::swapIn()
     ATPDXY_ASSERT(m_state!=EXEC);
     // 运行状态
     m_state=EXEC;
+
     // 交换上下文
-    if(swapcontext(&t_threadFiber->m_ctx,&m_ctx))
+    // if(swapcontext(&Scheduler::GetMainFiber()->m_ctx, &m_ctx))
+    if(swapcontext(&t_threadFiber->m_ctx, &m_ctx))
     {
-        ATPDXY_ASSERT2(false,"swapcontext");
+        ATPDXY_ASSERT2(false, "swapcontext");
     }
 }
-
 
 void Fiber::swapOut()
 {
@@ -298,7 +299,7 @@ void Fiber::CallerMainFunc()
     ATPDXY_ASSERT(cur);
     try
     {
-        cur->m_cb;
+        cur->m_cb();
         cur->m_cb=nullptr;
         cur->m_state=TERM;
     }

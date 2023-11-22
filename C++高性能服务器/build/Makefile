@@ -210,6 +210,19 @@ test_scheduler/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_scheduler.dir/build.make CMakeFiles/test_scheduler.dir/build
 .PHONY : test_scheduler/fast
 
+#=============================================================================
+# Target rules for targets named test_iomanager
+
+# Build rule for target.
+test_iomanager: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_iomanager
+.PHONY : test_iomanager
+
+# fast build rule for target.
+test_iomanager/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_iomanager.dir/build.make CMakeFiles/test_iomanager.dir/build
+.PHONY : test_iomanager/fast
+
 atpdxy/config/config.o: atpdxy/config/config.cpp.o
 .PHONY : atpdxy/config/config.o
 
@@ -257,6 +270,30 @@ atpdxy/fiber/fiber.s: atpdxy/fiber/fiber.cpp.s
 atpdxy/fiber/fiber.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/atpdxy.dir/build.make CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.s
 .PHONY : atpdxy/fiber/fiber.cpp.s
+
+atpdxy/iomanager/iomanager.o: atpdxy/iomanager/iomanager.cpp.o
+.PHONY : atpdxy/iomanager/iomanager.o
+
+# target to build an object file
+atpdxy/iomanager/iomanager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/atpdxy.dir/build.make CMakeFiles/atpdxy.dir/atpdxy/iomanager/iomanager.cpp.o
+.PHONY : atpdxy/iomanager/iomanager.cpp.o
+
+atpdxy/iomanager/iomanager.i: atpdxy/iomanager/iomanager.cpp.i
+.PHONY : atpdxy/iomanager/iomanager.i
+
+# target to preprocess a source file
+atpdxy/iomanager/iomanager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/atpdxy.dir/build.make CMakeFiles/atpdxy.dir/atpdxy/iomanager/iomanager.cpp.i
+.PHONY : atpdxy/iomanager/iomanager.cpp.i
+
+atpdxy/iomanager/iomanager.s: atpdxy/iomanager/iomanager.cpp.s
+.PHONY : atpdxy/iomanager/iomanager.s
+
+# target to generate assembly for a file
+atpdxy/iomanager/iomanager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/atpdxy.dir/build.make CMakeFiles/atpdxy.dir/atpdxy/iomanager/iomanager.cpp.s
+.PHONY : atpdxy/iomanager/iomanager.cpp.s
 
 atpdxy/log/log.o: atpdxy/log/log.cpp.o
 .PHONY : atpdxy/log/log.o
@@ -426,6 +463,30 @@ test/test_fiber.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fiber.dir/build.make CMakeFiles/test_fiber.dir/test/test_fiber.cpp.s
 .PHONY : test/test_fiber.cpp.s
 
+test/test_iomanager.o: test/test_iomanager.cpp.o
+.PHONY : test/test_iomanager.o
+
+# target to build an object file
+test/test_iomanager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_iomanager.dir/build.make CMakeFiles/test_iomanager.dir/test/test_iomanager.cpp.o
+.PHONY : test/test_iomanager.cpp.o
+
+test/test_iomanager.i: test/test_iomanager.cpp.i
+.PHONY : test/test_iomanager.i
+
+# target to preprocess a source file
+test/test_iomanager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_iomanager.dir/build.make CMakeFiles/test_iomanager.dir/test/test_iomanager.cpp.i
+.PHONY : test/test_iomanager.cpp.i
+
+test/test_iomanager.s: test/test_iomanager.cpp.s
+.PHONY : test/test_iomanager.s
+
+# target to generate assembly for a file
+test/test_iomanager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_iomanager.dir/build.make CMakeFiles/test_iomanager.dir/test/test_iomanager.cpp.s
+.PHONY : test/test_iomanager.cpp.s
+
 test/test_log.o: test/test_log.cpp.o
 .PHONY : test/test_log.o
 
@@ -533,6 +594,7 @@ help:
 	@echo "... atpdxy"
 	@echo "... test_config"
 	@echo "... test_fiber"
+	@echo "... test_iomanager"
 	@echo "... test_log"
 	@echo "... test_scheduler"
 	@echo "... test_thread"
@@ -543,6 +605,9 @@ help:
 	@echo "... atpdxy/fiber/fiber.o"
 	@echo "... atpdxy/fiber/fiber.i"
 	@echo "... atpdxy/fiber/fiber.s"
+	@echo "... atpdxy/iomanager/iomanager.o"
+	@echo "... atpdxy/iomanager/iomanager.i"
+	@echo "... atpdxy/iomanager/iomanager.s"
 	@echo "... atpdxy/log/log.o"
 	@echo "... atpdxy/log/log.i"
 	@echo "... atpdxy/log/log.s"
@@ -564,6 +629,9 @@ help:
 	@echo "... test/test_fiber.o"
 	@echo "... test/test_fiber.i"
 	@echo "... test/test_fiber.s"
+	@echo "... test/test_iomanager.o"
+	@echo "... test/test_iomanager.i"
+	@echo "... test/test_iomanager.s"
 	@echo "... test/test_log.o"
 	@echo "... test/test_log.i"
 	@echo "... test/test_log.s"

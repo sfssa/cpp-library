@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-11-20 10:08:19
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-11-21 14:39:42
+ * @LastEditTime: 2023-11-22 17:34:02
  * @FilePath: /cpp-library/C++高性能服务器/atpdxy/scheduler/scheduler.cpp
  * @Description: 
  * 
@@ -77,7 +77,7 @@ Scheduler* Scheduler::GetThis()
 }
 
 // 获得当前线程的协程调度器主协程
-Fiber* GetMainFiber()
+Fiber* Scheduler::GetMainFiber()
 {
     return t_scheduler_fiber;
 }
@@ -248,8 +248,7 @@ void Scheduler::run()
             else if(ft.fiber->getState()!=Fiber::TERM 
                     && ft.fiber->getState()!=Fiber::EXCEPT)
             {
-                ft.fiber->setState(Fiber::HOLD);
-                // ft.fiber->m_state=Fiber::HOLD;
+                ft.fiber->m_state=Fiber::HOLD;
             }
             // 清空任务
             ft.reset();
@@ -280,8 +279,7 @@ void Scheduler::run()
                 cb_fiber->reset(nullptr); // 任务指针置空，表示没有任务要执行
             else
             {
-                cb_fiber->setState(Fiber::HOLD);
-                // cb_fiber->m_state=Fiber::HOLD;
+                cb_fiber->m_state=Fiber::HOLD;
                 cb_fiber.reset();
             }
         }
@@ -312,8 +310,7 @@ void Scheduler::run()
             if(idle_fiber->getState()!=Fiber::TERM
                && idle_fiber->getState()!=Fiber::EXCEPT)
             {
-                idle_fiber->setState(Fiber::HOLD);
-                // idle_fiber->m_state=Fiber::HOLD;
+                idle_fiber->m_state=Fiber::HOLD;
             }
         }
     }

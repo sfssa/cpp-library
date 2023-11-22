@@ -16,6 +16,7 @@ link_directories(/usr/local/lib)
 set(LIB_SRC
     atpdxy/config/config.cpp
     atpdxy/fiber/fiber.cpp
+    atpdxy/iomanager/iomanager.cpp
     atpdxy/log/log.cpp
     atpdxy/mutex/mutex.cpp
     atpdxy/scheduler/scheduler.cpp
@@ -65,6 +66,11 @@ add_executable(test_scheduler test/test_scheduler.cpp)
 add_dependencies(test_scheduler atpdxy)
 force_redefine_file_macro_for_sources(test_scheduler)
 target_link_libraries(test_scheduler ${LIBS})
+
+add_executable(test_iomanager test/test_iomanager.cpp)
+add_dependencies(test_iomanager atpdxy)
+force_redefine_file_macro_for_sources(test_iomanager)
+target_link_libraries(test_iomanager ${LIBS})
 
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)

@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/atpdxy.dir/atpdxy/config/config.cpp.o.d"
   "CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.o"
   "CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.o.d"
+  "CMakeFiles/atpdxy.dir/atpdxy/iomanager/iomanager.cpp.o"
+  "CMakeFiles/atpdxy.dir/atpdxy/iomanager/iomanager.cpp.o.d"
   "CMakeFiles/atpdxy.dir/atpdxy/log/log.cpp.o"
   "CMakeFiles/atpdxy.dir/atpdxy/log/log.cpp.o.d"
   "CMakeFiles/atpdxy.dir/atpdxy/mutex/mutex.cpp.o"

@@ -12,6 +12,8 @@ CXX_FLAGS =  -rdynamic -O3 -g -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unus
 
 # Custom defines: CMakeFiles/atpdxy.dir/atpdxy/fiber/fiber.cpp.o_DEFINES = __FILE__="atpdxy/fiber/fiber.cpp"
 
+# Custom defines: CMakeFiles/atpdxy.dir/atpdxy/iomanager/iomanager.cpp.o_DEFINES = __FILE__="atpdxy/iomanager/iomanager.cpp"
+
 # Custom defines: CMakeFiles/atpdxy.dir/atpdxy/log/log.cpp.o_DEFINES = __FILE__="atpdxy/log/log.cpp"
 
 # Custom defines: CMakeFiles/atpdxy.dir/atpdxy/mutex/mutex.cpp.o_DEFINES = __FILE__="atpdxy/mutex/mutex.cpp"

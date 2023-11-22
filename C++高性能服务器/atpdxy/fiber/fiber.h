@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2023-11-13 18:14:11
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2023-11-21 10:45:12
+ * @LastEditTime: 2023-11-22 16:05:57
  * @FilePath: /cpp-library/C++高性能服务器/atpdxy/fiber/fiber.h
  * @Description: 
  * 
@@ -19,11 +19,11 @@
 namespace atpdxy
 {
 
-class Schedule;
+class Scheduler;
 // 对象应该由智能指针管理而不是在栈上创建
 class Fiber : public std::enable_shared_from_this<Fiber>
 {
-friend class Schedule;
+friend class Scheduler;
 public:
     typedef std::shared_ptr<Fiber> ptr;
     enum State
@@ -88,7 +88,7 @@ public:
     // 获得状态
     State getState() const {return m_state;}
 
-    void setState(const State state){m_state=state;}
+    // void setState(const State state){m_state=state;}
 private:
     uint64_t m_id=0;            // 协程ID
     uint32_t m_stacksize=0;     // 协程栈大小
