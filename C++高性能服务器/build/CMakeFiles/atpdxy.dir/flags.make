@@ -22,5 +22,7 @@ CXX_FLAGS =  -rdynamic -O3 -g -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unus
 
 # Custom defines: CMakeFiles/atpdxy.dir/atpdxy/thread/thread.cpp.o_DEFINES = __FILE__="atpdxy/thread/thread.cpp"
 
+# Custom defines: CMakeFiles/atpdxy.dir/atpdxy/timer/timer.cpp.o_DEFINES = __FILE__="atpdxy/timer/timer.cpp"
+
 # Custom defines: CMakeFiles/atpdxy.dir/atpdxy/utils/utils.cpp.o_DEFINES = __FILE__="atpdxy/utils/utils.cpp"
 
